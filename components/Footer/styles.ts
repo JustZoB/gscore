@@ -21,7 +21,7 @@ export const CopyrightContainer = styled.div`
 export const FooterContent = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 25%;
+  max-width: 320px;
 `
 
 export const FooterText = styled.p`
