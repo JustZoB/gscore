@@ -9,6 +9,7 @@ export const Header: React.FC = () => {
       <Image
         src={logo}
         alt='Logo'
+        layout="fixed"
       />
     </HeaderContainer>
   )
