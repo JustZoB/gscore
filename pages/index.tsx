@@ -1,6 +1,7 @@
 import { Button } from "../components/Button";
 import { CardBuy } from "../components/CardBuy";
 import { TextField } from "../components/TextField";
+import Link from 'next/link'
 import { H1, H2, H3 } from "../components/Titles";
 import styled from "styled-components";
 import colors from '../utils/colors';
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <div>
       <H2>Get started with Gscore today!</H2>
+
       <Cards>
         <CardBuy marginTop={50}>
           <H1 marginBottom={0}>$77</H1>
@@ -31,11 +33,13 @@ export default function Home() {
               Billed annually
             </CardBuyItem>
           </CardBuyList>
-          <Button
-            label="Get Gscore"
-            backgroundColor={colors.white}
-            textColor={colors.darkerGray}
-          />
+          <Link href="/authorization" passHref>
+            <Button
+              label="Get Gscore"
+              backgroundColor={colors.white}
+              textColor={colors.darkerGray}
+            />
+          </Link>
         </CardBuy>
         <CardBuy backgroundColor={colors.lightRed}>
           <H1 marginBottom={0}>$117</H1>
@@ -57,11 +61,13 @@ export default function Home() {
               Billed annually
             </CardBuyItem>
           </CardBuyList>
-          <Button
-            label="Get Gscore"
-            backgroundColor={colors.white}
-            textColor={colors.lightRed}
-          />
+          <Link href="/authorization" passHref>
+            <Button
+              label="Get Gscore"
+              backgroundColor={colors.white}
+              textColor={colors.lightRed}
+            />
+          </Link>
         </CardBuy>
         <CardBuy marginTop={50}>
           <H1 marginBottom={0}>$167</H1>
@@ -83,20 +89,15 @@ export default function Home() {
               Billed annually
             </CardBuyItem>
           </CardBuyList>
-          <Button
-            label="Get Gscore"
-            backgroundColor={colors.white}
-            textColor={colors.darkerGray}
-          />
+          <Link href="/authorization" passHref>
+            <Button
+              label="Get Gscore"
+              backgroundColor={colors.white}
+              textColor={colors.darkerGray}
+            />
+          </Link>
         </CardBuy>
       </Cards>
-      <TextField
-        placeholder="Email"
-      />
-      <Button
-        label="Save all changes"
-        width={'fit-content'}
-      />
     </div>
   )
 }

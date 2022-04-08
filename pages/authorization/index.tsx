@@ -1,7 +1,14 @@
+// import SignUp from "./SignUp";
+// import SignIn from "./SignIn";
+import { AuthorizationWrap } from "./styles";
+import { Checkout } from "./Checkout";
+
 export default function Authorization() {
   return (
-    <div>
-      <h1>Authorization</h1>
-    </div>
+    <AuthorizationWrap>
+      {/* <SignUp />
+      <SignIn /> */}
+      <Checkout />
+    </AuthorizationWrap>
   )
 }
