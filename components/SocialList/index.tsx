@@ -13,6 +13,7 @@ export const SocialList: React.FC = () => {
           <Image
             src={facebook}
             alt='facebook'
+            layout="fixed"
           />
         </a>
       </SocialItem>
@@ -21,6 +22,7 @@ export const SocialList: React.FC = () => {
           <Image
             src={twitter}
             alt='twitter'
+            layout="fixed"
           />
         </a>
       </SocialItem>
@@ -29,6 +31,7 @@ export const SocialList: React.FC = () => {
           <Image
             src={linkedin}
             alt='linkedin'
+            layout="fixed"
           />
         </a>
       </SocialItem>
