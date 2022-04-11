@@ -34,11 +34,13 @@ export default function Home() {
             </CardBuyItem>
           </CardBuyList>
           <Link href="/authorization" passHref>
-            <Button
-              label="Get Gscore"
-              backgroundColor={colors.white}
-              textColor={colors.darkerGray}
-            />
+            <a>
+              <Button
+                label="Get Gscore"
+                backgroundColor={colors.white}
+                textColor={colors.darkerGray}
+              />
+            </a>
           </Link>
         </CardBuy>
         <CardBuy backgroundColor={colors.lightRed}>
@@ -62,11 +64,13 @@ export default function Home() {
             </CardBuyItem>
           </CardBuyList>
           <Link href="/authorization" passHref>
-            <Button
-              label="Get Gscore"
-              backgroundColor={colors.white}
-              textColor={colors.lightRed}
-            />
+            <a>
+              <Button
+                label="Get Gscore"
+                backgroundColor={colors.white}
+                textColor={colors.lightRed}
+              />
+            </a>
           </Link>
         </CardBuy>
         <CardBuy marginTop={50}>
@@ -90,11 +94,13 @@ export default function Home() {
             </CardBuyItem>
           </CardBuyList>
           <Link href="/authorization" passHref>
-            <Button
-              label="Get Gscore"
-              backgroundColor={colors.white}
-              textColor={colors.darkerGray}
-            />
+            <a>
+              <Button
+                label="Get Gscore"
+                backgroundColor={colors.white}
+                textColor={colors.darkerGray}
+              />
+            </a>
           </Link>
         </CardBuy>
       </Cards>

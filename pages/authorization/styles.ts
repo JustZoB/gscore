@@ -26,7 +26,7 @@ export const AuthorizationText = styled.p<AuthorizationTextProps>`
   margin-bottom: 32px;
   color: ${colors.white};
 `
-export const AuthorizationLink = styled.p`
+export const AuthorizationLink = styled.a`
   font-size: 16px;
   line-height: 18px;
   margin-left: 8px;
@@ -50,7 +50,7 @@ export const ErrorMessage = styled.p`
   color: ${colors.red};
 `
 
-export const CheckoutTotalContainer = styled.p`
+export const CheckoutTotalContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 48px;
