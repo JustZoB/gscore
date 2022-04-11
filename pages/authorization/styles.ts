@@ -14,6 +14,7 @@ export const AuthorizationContainer = styled.div`
 `
 export const HaveAnAccountContainer = styled.div`
   display: flex;
+  margin-top: 48px;
 `
 
 export interface AuthorizationTextProps {
