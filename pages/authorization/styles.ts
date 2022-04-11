@@ -41,14 +41,14 @@ export const TextFieldError = styled.span`
   margin-top: 26px;
   font-size: 16px;
   line-height: 18px;
-  color: ${colors.red};
+  color: ${colors.lightRed};
 `
 
 export const ErrorMessage = styled.p`
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 18px;
+  line-height: 20px;
   margin-bottom: 30px;
-  color: ${colors.red};
+  color: ${colors.lightRed};
 `
 
 export const CheckoutTotalContainer = styled.div`

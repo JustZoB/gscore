@@ -2,15 +2,23 @@ import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
 import { signInValidate } from "../../utils/validation";
-import { AuthorizationContainer, TextFieldError } from "./styles";
+import { AuthorizationContainer, ErrorMessage, TextFieldError } from "./styles";
 import { H2 } from "../../components/Titles";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSignIn } from "../../store/authorization/actions";
+import { RootState } from "../../store/store";
 
 export const SignIn: React.FC = () => {
+  const authorization = useSelector((state: RootState) => state.authorizationSlice);
+  const dispatch = useDispatch();
   const EMAIL_FIELD = 'email';
   const PASSWORD_FIELD = 'password';
 
   const onSignIn = (values: { email: string, password: string }) => {
-    console.log(values)
+    dispatch(fetchSignIn({
+      email: values.email,
+      password: values.password
+    }))
   }
 
   return (
@@ -39,6 +47,7 @@ export const SignIn: React.FC = () => {
                 <>
                   <TextField
                     {...input}
+                    type='password'
                     placeholder='Password'
                   />
                   {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -46,19 +55,15 @@ export const SignIn: React.FC = () => {
               )}
             />
 
+            {authorization.error &&
+              <ErrorMessage>{authorization.error.message}</ErrorMessage>
+            }
+
             <Button
               label="Log in"
               width={'fit-content'}
               onClick={handleSubmit}
             />
-            {/* {auth.error &&
-              <>
-                {auth.error.name === "QueryFailedError"
-                  ? <ErrorMessage>This e-mail is already taken</ErrorMessage>>
-                  : <ErrorMessage>{auth.error.message}</ErrorMessage>>
-                }
-              </>
-            } */}
           </>
         )}
       />

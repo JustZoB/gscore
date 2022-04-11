@@ -6,11 +6,11 @@ export interface ItemProps {
   active: boolean;
 }
 
-export const AuthtorizationNavbarItem: React.FC = ({ children }) => {
+export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active }) => {
   return (
-    <ItemContainer active={false} >
+    <ItemContainer active={active} >
       <ItemText>{children}</ItemText>
-      <ItemLine active={false} />
+      <ItemLine active={active} />
     </ItemContainer>
   )
 }

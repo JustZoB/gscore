@@ -2,20 +2,30 @@ import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
 import { signUpValidate } from "../../utils/validation";
-import { AuthorizationContainer, AuthorizationLink, AuthorizationText, HaveAnAccountContainer, TextFieldError } from "./styles";
+import { AuthorizationContainer, AuthorizationLink, AuthorizationText, ErrorMessage, HaveAnAccountContainer, TextFieldError } from "./styles";
 import { H2 } from "../../components/Titles";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSignUp } from "../../store/authorization/actions";
+import { setNav } from "../../store/authorization/reducers";
+import { RootState } from "../../store/store";
 
 export const SignUp: React.FC = () => {
+  const authorization = useSelector((state: RootState) => state.authorizationSlice);
+  const dispatch = useDispatch();
   const EMAIL_FIELD = 'email';
   const USERNAME_FIELD = 'username';
   const PASSWORD_FIELD = 'password';
 
-  const onSignUp = (values: { username: string, email: string, password: string }) => {
-    console.log(values)
+  const onSignUp = (values: { email: string, username: string, password: string }) => {
+    dispatch(fetchSignUp({
+      email: values.email,
+      username: values.username,
+      password: values.password,
+    }))
   }
 
   const nextStep = () => {
-    console.log('nextstep')
+    dispatch(setNav('signin'))
   }
 
   return (
@@ -56,6 +66,7 @@ export const SignUp: React.FC = () => {
                 <>
                   <TextField
                     {...input}
+                    type='password'
                     placeholder='Password'
                   />
                   {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -63,19 +74,20 @@ export const SignUp: React.FC = () => {
               )}
             />
 
+            {authorization.error &&
+              <>
+                {authorization.error.message === "Request failed with status code 409"
+                  ? <ErrorMessage>This e-mail is already taken</ErrorMessage>
+                  : <ErrorMessage>{authorization.error.message}</ErrorMessage>
+                }
+              </>
+            }
+
             <Button
               label="Sign Up"
               width={'fit-content'}
               onClick={handleSubmit}
             />
-            {/* {auth.error &&
-              <>
-                {auth.error.name === "QueryFailedError"
-                  ? <ErrorMessage>This e-mail is already taken</ErrorMessage>>
-                  : <ErrorMessage>{auth.error.message}</ErrorMessage>>
-                }
-              </>
-            } */}
           </>
         )}
       />

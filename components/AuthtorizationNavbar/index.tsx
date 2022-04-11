@@ -1,14 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../store/store";
 import { AuthtorizationNavbarItem } from "./AuthtorizationNavbarItem";
 
 export const AuthtorizationNavbar: React.FC = () => {
+  const authorization = useSelector((state: RootState) => state.authorizationSlice);
+
   return (
     <AuthtorizationNavbarWrap>
       <AuthtorizationNavbarContainer>
-        <AuthtorizationNavbarItem>Create account</AuthtorizationNavbarItem>
-        <AuthtorizationNavbarItem>Log in</AuthtorizationNavbarItem>
-        <AuthtorizationNavbarItem>Checkout</AuthtorizationNavbarItem>
+        <AuthtorizationNavbarItem active={authorization.nav === 'signup'}>Create account</AuthtorizationNavbarItem>
+        <AuthtorizationNavbarItem active={authorization.nav === 'signin'}>Log in</AuthtorizationNavbarItem>
+        <AuthtorizationNavbarItem active={authorization.nav === 'checkout'}>Checkout</AuthtorizationNavbarItem>
       </AuthtorizationNavbarContainer>
     </AuthtorizationNavbarWrap>
   )
