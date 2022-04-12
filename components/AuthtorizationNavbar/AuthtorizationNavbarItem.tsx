@@ -4,11 +4,12 @@ import colors from "../../utils/colors";
 
 export interface ItemProps {
   active: boolean;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active }) => {
+export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active, onClick}) => {
   return (
-    <ItemContainer active={active} >
+    <ItemContainer active={active} onClick={onClick}>
       <ItemText>{children}</ItemText>
       <ItemLine active={active} />
     </ItemContainer>
@@ -19,6 +20,7 @@ export const ItemContainer = styled.div<ItemProps>`
   display: flex;
   flex-direction: column;
   width: calc(33.33% - 10px);
+  cursor: ${(props) => (!props.active && props.onClick ? 'pointer' : 'defualt')};
 
   &:not(:last-child) {
     margin-right: 15px;
