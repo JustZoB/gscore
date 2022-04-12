@@ -5,15 +5,31 @@ import Image from 'next/image';
 import checkBlack from '../../public/checkCircleBlack.svg';
 import checkRed from '../../public/checkCircleRed.svg';
 
-export interface CardBuyItemProps {
-  backgroundColor?: string;
+export interface CardBuyListProps {
+  isEven: boolean,
+  sitesCount: number,
 }
 
-export const CardBuyItem: React.FC<CardBuyItemProps> = ({ children, backgroundColor }) => {
+export interface CardBuyItemProps {
+  isEven: boolean,
+}
+
+export const CardBuyList: React.FC<CardBuyListProps> = ({ isEven, sitesCount }) => {
+  return (
+    <CardBuyListContainer>
+      <CardBuyItem isEven={isEven}>{sitesCount} sites license</CardBuyItem>
+      <CardBuyItem isEven={isEven}>Special introductory pricing</CardBuyItem>
+      <CardBuyItem isEven={isEven}>Unlimited Pages and Keywords</CardBuyItem>
+      <CardBuyItem isEven={isEven}>Billed annually</CardBuyItem>
+    </CardBuyListContainer>
+  )
+}
+
+export const CardBuyItem: React.FC<CardBuyItemProps> = ({ children, isEven }) => {
   return (
     <StyledCardBuyItem>
       <Image
-        src={backgroundColor != undefined ? checkRed : checkBlack}
+        src={isEven ? checkBlack : checkRed}
         alt='check'
         layout="fixed"
       />
@@ -24,7 +40,7 @@ export const CardBuyItem: React.FC<CardBuyItemProps> = ({ children, backgroundCo
   )
 }
 
-export const CardBuyList = styled.ul`
+export const CardBuyListContainer = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 35px;

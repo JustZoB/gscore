@@ -47,4 +47,18 @@ export interface UserExport {
   token: string,
 }
 
+export interface Product {
+  id: number,
+  sitesCount: number,
+  name: string,
+  prices: Price[],
+}
+
+export interface Price {
+  id: number,
+  isActive: boolean,
+  productId: number,
+  price: string,
+}
+
 export default instance
