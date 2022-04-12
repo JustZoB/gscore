@@ -4,6 +4,7 @@ import { fetchSignIn, fetchSignUp, fetchUpdatePassword, fetchUpdatePersonalData 
 
 type UserState = {
   nav: 'signup' | 'signin' | 'checkout'
+  settingsNav: 'personalInfo' | 'changePassword'
   user: UserExport | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
@@ -14,11 +15,23 @@ const authorizationAdapter = createEntityAdapter<UserState>();
 
 const authorizationSlice = createSlice({
   name: 'authorizationSlice',
-  initialState: authorizationAdapter.getInitialState<UserState>({ nav: 'signup', user: undefined, loading: 'idle', error: undefined, complete: undefined}),
+  initialState: authorizationAdapter.getInitialState<UserState>({
+    nav: 'signup',
+    user: undefined,
+    loading: 'idle',
+    error: undefined,
+    complete: undefined,
+    settingsNav: 'personalInfo'}
+  ),
   reducers: {
     setNav: (state, action: PayloadAction<'signup' | 'signin' | 'checkout'>) => {
       state.nav = action.payload
       state.error = undefined
+    },
+    setSettingsNav: (state, action: PayloadAction<'personalInfo' | 'changePassword'>) => {
+      state.settingsNav = action.payload
+      state.error = undefined
+      state.complete = undefined
     },
     logOut: (state) => {
       state.user = undefined
@@ -90,6 +103,7 @@ const authorizationSlice = createSlice({
 
 export const {
   setNav,
+  setSettingsNav,
   logOut,
 } = authorizationSlice.actions;
 
