@@ -5,8 +5,9 @@ import { changePersonalDataValidate } from "../../utils/validation";
 import { H3 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { TextFieldError, ErrorMessage, FieldContainer } from "../../components/TextField/styles";
+import { TextFieldError, ErrorMessage, FieldContainer, CompleteMessage } from "../../components/TextField/styles";
 import { FormContainer } from "./styles";
+import { fetchUpdatePersonalData } from "../../store/authorization/actions";
 
 export const UpdateDataForm: React.FC = () => {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
@@ -15,7 +16,10 @@ export const UpdateDataForm: React.FC = () => {
   const EMAIL_FIELD = 'email';
 
   const onChangePersonalData = (values: { username: string, email: string, }) => {
-    console.log(values.username, values.email)
+    dispatch(fetchUpdatePersonalData({
+      email: values.email,
+      username: values.username
+    }))
   }
 
   return (
@@ -62,6 +66,10 @@ export const UpdateDataForm: React.FC = () => {
                   : <ErrorMessage>{authorization.error.message}</ErrorMessage>
                 }
               </>
+            }
+
+            {authorization.complete &&
+              <CompleteMessage>{authorization.complete}</CompleteMessage>
             }
 
             <Button

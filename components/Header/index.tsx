@@ -6,16 +6,22 @@ import logout from '../../public/logout.svg';
 import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText } from "./styles";
 import Image from 'next/image';
 import Link from 'next/link'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { logOut, setNav } from "../../store/authorization/reducers";
 
 export const Header: React.FC = () => {
+  const dispatch = useDispatch();
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const [dropDownActive, setDropDownActive] = useState<boolean>(false);
 
-  const toggleDropDown = (e) => {
-    e.preventDefault();
+  const toggleDropDown = () => {
     setDropDownActive(!dropDownActive)
+  }
+
+  const handleLogOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    dispatch(logOut())
+    dispatch(setNav('signin'))
   }
 
   return (
@@ -62,7 +68,7 @@ export const Header: React.FC = () => {
                         </a>
                       </Link>
 
-                      <LinkContainer>
+                      <LinkContainer onClick={handleLogOut}>
                         <Image
                           src={logout}
                           alt='Logout'

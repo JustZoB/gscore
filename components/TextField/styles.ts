@@ -33,3 +33,10 @@ export const ErrorMessage = styled.p`
   margin-bottom: 30px;
   color: ${colors.lightRed};
 `
+
+export const CompleteMessage = styled.p`
+  font-size: 18px;
+  line-height: 20px;
+  margin-bottom: 30px;
+  color: ${colors.green};
+`

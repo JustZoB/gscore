@@ -1,9 +1,10 @@
 import { H2 } from "../../components/Titles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { SettingsContainer, FormsContainer } from "./styles";
 import { UpdateDataForm } from "./UpdateDataForm";
 import { UpdatePassword } from "./UpdatePassword";
+import Link from 'next/link'
 
 export default function Settings() {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
@@ -11,10 +12,19 @@ export default function Settings() {
   return (
     <SettingsContainer>
       <H2 textAlign="left" marginBottom={48}>Settings</H2>
-      <FormsContainer>
-        <UpdateDataForm />
-        <UpdatePassword />
-      </FormsContainer>
+      {authorization.user ?
+        <>
+        {authorization.user.token &&
+          <FormsContainer>
+            <UpdateDataForm />
+            <UpdatePassword />
+          </FormsContainer>
+        }
+        </>
+      :
+      <Link href="/authorization">Please login</Link>
+    }
+      
     </SettingsContainer>
   )
 }

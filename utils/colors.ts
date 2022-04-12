@@ -8,7 +8,7 @@ enum colors {
     lightRed = '#FC5842',
     red = '#FF5A65',
     darkRed = '#DC2B2B',
-    green = '#DC2B2B',
+    green = '#05C168',
     orange = '#FF9E2C',
   };
   

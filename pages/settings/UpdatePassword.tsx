@@ -5,8 +5,9 @@ import { updatePasswordValidate } from "../../utils/validation";
 import { H3 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { TextFieldError, ErrorMessage, FieldContainer } from "../../components/TextField/styles";
+import { TextFieldError, ErrorMessage, FieldContainer, CompleteMessage } from "../../components/TextField/styles";
 import { FormContainer } from "./styles";
+import { fetchUpdatePassword } from "../../store/authorization/actions";
 
 export const UpdatePassword: React.FC = () => {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
@@ -15,7 +16,10 @@ export const UpdatePassword: React.FC = () => {
   const NEW_PASSWORD_FIELD = 'newPassword';
 
   const onUpdatePassword = (values: { currentPassword: string, newPassword: string }) => {
-    console.log(values.currentPassword, values.newPassword)
+    dispatch(fetchUpdatePassword({
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword
+    }))
   }
 
   return (
@@ -64,6 +68,10 @@ export const UpdatePassword: React.FC = () => {
                   : <ErrorMessage>{authorization.error.message}</ErrorMessage>
                 }
               </>
+            }
+
+            {authorization.complete &&
+              <CompleteMessage>{authorization.complete}</CompleteMessage>
             }
 
             <Button
