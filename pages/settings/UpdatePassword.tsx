@@ -5,7 +5,7 @@ import { updatePasswordValidate } from "../../utils/validation";
 import { H3 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
+import { TextFieldError, ErrorMessage, FieldContainer } from "../../components/TextField/styles";
 import { FormContainer } from "./styles";
 
 export const UpdatePassword: React.FC = () => {
@@ -26,32 +26,36 @@ export const UpdatePassword: React.FC = () => {
         render={({ handleSubmit }) => (
           <>
             <H3 textAlign="left" marginBottom={24}>Change password</H3>
-            <Field
-              name={CURRENT_PASSWORD_FIELD}
-              render={({ input, meta }) => (
-                <>
-                  <TextField
-                    {...input}
-                    type='password'
-                    placeholder='Current Password'
-                  />
-                  {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                </>
-              )}
-            />
-            <Field
-              name={NEW_PASSWORD_FIELD}
-              render={({ input, meta }) => (
-                <>
-                  <TextField
-                    {...input}
-                    type='password'
-                    placeholder='New Password'
-                  />
-                  {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                </>
-              )}
-            />
+            <FieldContainer>
+              <Field
+                name={CURRENT_PASSWORD_FIELD}
+                render={({ input, meta }) => (
+                  <>
+                    <TextField
+                      {...input}
+                      type='password'
+                      placeholder='Current Password'
+                    />
+                    {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                  </>
+                )}
+              />
+            </FieldContainer>
+            <FieldContainer>
+              <Field
+                name={NEW_PASSWORD_FIELD}
+                render={({ input, meta }) => (
+                  <>
+                    <TextField
+                      {...input}
+                      type='password'
+                      placeholder='New Password'
+                    />
+                    {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                  </>
+                )}
+              />
+            </FieldContainer>
 
             {authorization.error &&
               <>

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import colors from "../../utils/colors";
 
+export const FieldContainer = styled.div`
+  position: relative;
+`
+
 export const Input = styled.input`
   position: relative;
   width: calc(100% - 52px);

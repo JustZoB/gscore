@@ -5,7 +5,7 @@ import { changePersonalDataValidate } from "../../utils/validation";
 import { H3 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
+import { TextFieldError, ErrorMessage, FieldContainer } from "../../components/TextField/styles";
 import { FormContainer } from "./styles";
 
 export const UpdateDataForm: React.FC = () => {
@@ -26,30 +26,34 @@ export const UpdateDataForm: React.FC = () => {
         render={({ handleSubmit }) => (
           <>
             <H3 textAlign="left" marginBottom={24}>Personal Info</H3>
-            <Field
-              name={USERNAME_FIELD}
-              render={({ input, meta }) => (
-                <>
-                  <TextField
-                    {...input}
-                    placeholder='Username'
-                  />
-                  {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                </>
-              )}
-            />
-            <Field
-              name={EMAIL_FIELD}
-              render={({ input, meta }) => (
-                <>
-                  <TextField
-                    {...input}
-                    placeholder='Email'
-                  />
-                  {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                </>
-              )}
-            />
+            <FieldContainer>
+              <Field
+                name={USERNAME_FIELD}
+                render={({ input, meta }) => (
+                  <>
+                    <TextField
+                      {...input}
+                      placeholder='Username'
+                    />
+                    {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                  </>
+                )}
+              />
+            </FieldContainer>
+            <FieldContainer>
+              <Field
+                name={EMAIL_FIELD}
+                render={({ input, meta }) => (
+                  <>
+                    <TextField
+                      {...input}
+                      placeholder='Email'
+                    />
+                    {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                  </>
+                )}
+              />
+            </FieldContainer>
 
             {authorization.error &&
               <>
