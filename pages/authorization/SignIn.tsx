@@ -56,7 +56,12 @@ export const SignIn: React.FC = () => {
             />
 
             {authorization.error &&
-              <ErrorMessage>{authorization.error.message}</ErrorMessage>
+              <>
+                {authorization.error.message === "Request failed with status code 400"
+                  ? <ErrorMessage>Incorrect email or password</ErrorMessage>
+                  : <ErrorMessage>{authorization.error.message}</ErrorMessage>
+                }
+              </>
             }
 
             <Button
