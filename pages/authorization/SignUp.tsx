@@ -85,7 +85,7 @@ export const SignUp: React.FC = () => {
 
             <Button
               label="Sign Up"
-              width={'fit-content'}
+              theme="primary"
               onClick={handleSubmit}
             />
           </>

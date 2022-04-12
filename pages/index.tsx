@@ -37,8 +37,8 @@ export default function Home() {
             <a>
               <Button
                 label="Get Gscore"
-                backgroundColor={colors.white}
-                textColor={colors.darkerGray}
+                theme="secondary"
+                size="big"
               />
             </a>
           </Link>
@@ -67,8 +67,8 @@ export default function Home() {
             <a>
               <Button
                 label="Get Gscore"
-                backgroundColor={colors.white}
-                textColor={colors.lightRed}
+                theme="secondary"
+                size="big"
               />
             </a>
           </Link>
@@ -97,8 +97,8 @@ export default function Home() {
             <a>
               <Button
                 label="Get Gscore"
-                backgroundColor={colors.white}
-                textColor={colors.darkerGray}
+                theme="secondary"
+                size="big"
               />
             </a>
           </Link>

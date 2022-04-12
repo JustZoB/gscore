@@ -66,7 +66,7 @@ export const SignIn: React.FC = () => {
 
             <Button
               label="Log in"
-              width={'fit-content'}
+              theme="primary"
               onClick={handleSubmit}
             />
           </>

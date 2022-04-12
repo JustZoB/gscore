@@ -29,7 +29,7 @@ export const Checkout: React.FC = () => {
       </CheckoutTotalContainer>
       <Button
         label="Purchase"
-        width={'fit-content'}
+        theme="primary"
       />
     </AuthorizationContainer>
   )

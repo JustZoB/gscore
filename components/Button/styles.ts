@@ -3,10 +3,9 @@ import { ButtonProps } from ".";
 import colors from "../../utils/colors";
 
 export const StyledButton = styled.button<ButtonProps>`
-  width: ${(props) => (props.width != undefined ? (Number.isInteger(props.width) ? props.width + 'px' : props.width) : '100%')};
-  max-width: ${(props) => (props.maxWidth != undefined ? props.maxWidth + 'px' : 'unset')};
-  background-color: ${(props) => (props.backgroundColor != undefined ? props.backgroundColor : colors.lightRed)};
-  color: ${(props) => (props.textColor != undefined ? props.textColor : colors.white)};
+  width: ${(props) => (props.size === 'big' ? '100%' : 'fit-content')};
+  background-color: ${(props) => (props.theme != 'primary' ? colors.white : colors.lightRed)};
+  color: ${(props) => (props.theme != 'primary' ? colors.lightRed : colors.white)};
   font-size: 18px;
   line-height: 20px;
   font-weight: 700;
