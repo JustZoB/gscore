@@ -2,12 +2,13 @@ import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
 import { signUpValidate } from "../../utils/validation";
-import { AuthorizationContainer, AuthorizationLink, AuthorizationText, ErrorMessage, HaveAnAccountContainer, TextFieldError } from "./styles";
+import { AuthorizationContainer, AuthorizationLink, AuthorizationText, HaveAnAccountContainer} from "./styles";
 import { H2 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignUp } from "../../store/authorization/actions";
 import { setNav } from "../../store/authorization/reducers";
 import { RootState } from "../../store/store";
+import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
 
 export const SignUp: React.FC = () => {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);

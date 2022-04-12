@@ -1,55 +1,52 @@
 import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
-import { signInValidate } from "../../utils/validation";
-import { AuthorizationContainer } from "./styles";
-import { H2 } from "../../components/Titles";
+import { updatePasswordValidate } from "../../utils/validation";
+import { H3 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSignIn } from "../../store/authorization/actions";
 import { RootState } from "../../store/store";
 import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
+import { FormContainer } from "./styles";
 
-export const SignIn: React.FC = () => {
+export const UpdatePassword: React.FC = () => {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const dispatch = useDispatch();
-  const EMAIL_FIELD = 'email';
-  const PASSWORD_FIELD = 'password';
+  const CURRENT_PASSWORD_FIELD = 'currentPassword';
+  const NEW_PASSWORD_FIELD = 'newPassword';
 
-  const onSignIn = (values: { email: string, password: string }) => {
-    dispatch(fetchSignIn({
-      email: values.email,
-      password: values.password
-    }))
+  const onUpdatePassword = (values: { currentPassword: string, newPassword: string }) => {
+    console.log(values.currentPassword, values.newPassword)
   }
 
   return (
-    <AuthorizationContainer>
-      <H2 textAlign="left" marginBottom={24}>Log in</H2>
+    <FormContainer>
       <Form
-        onSubmit={onSignIn}
-        validate={signInValidate}
+        onSubmit={onUpdatePassword}
+        validate={updatePasswordValidate}
         render={({ handleSubmit }) => (
           <>
+            <H3 textAlign="left" marginBottom={24}>Change password</H3>
             <Field
-              name={EMAIL_FIELD}
+              name={CURRENT_PASSWORD_FIELD}
               render={({ input, meta }) => (
                 <>
                   <TextField
                     {...input}
-                    placeholder='Email'
+                    type='password'
+                    placeholder='Current Password'
                   />
                   {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
                 </>
               )}
             />
             <Field
-              name={PASSWORD_FIELD}
+              name={NEW_PASSWORD_FIELD}
               render={({ input, meta }) => (
                 <>
                   <TextField
                     {...input}
                     type='password'
-                    placeholder='Password'
+                    placeholder='New Password'
                   />
                   {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
                 </>
@@ -66,13 +63,13 @@ export const SignIn: React.FC = () => {
             }
 
             <Button
-              label="Log in"
+              label="Update password"
               theme="primary"
               onClick={handleSubmit}
             />
           </>
         )}
       />
-    </AuthorizationContainer>
+    </FormContainer>
   )
 }
