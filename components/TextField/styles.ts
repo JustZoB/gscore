@@ -2,7 +2,8 @@ import styled from "styled-components";
 import colors from "../../utils/colors";
 
 export const Input = styled.input`
-  width: 100%;
+  position: relative;
+  width: calc(100% - 52px);
   font-size: 16px;
   line-height: 18px;
   margin-bottom: 24px;

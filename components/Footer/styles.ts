@@ -7,6 +7,7 @@ export const FooterContainer = styled.footer`
   background-color: ${colors.black};
   color: ${colors.lightGray};
   padding: 60px 86px 0;
+  margin-top: 40px;
 `
 
 export const CopyrightContainer = styled.div`
