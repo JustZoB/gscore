@@ -26,9 +26,24 @@ export interface SignUp {
   password: string,
 }
 
+export interface UpdatePersonalData {
+  username: string,
+  email: string,
+}
+
+export interface UpdatePassword {
+  currentPassword: string,
+  newPassword: string,
+}
+
 export interface User {
-  email?: string,
-  username?: string,
+  id: number,
+  email: string,
+  username: string,
+}
+
+export interface UserExport {
+  user: User,
   token: string,
 }
 

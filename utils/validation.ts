@@ -94,3 +94,30 @@ export const signUpValidate = (values: { username?: string, email?: string, pass
   }
   return errors
 }
+
+export const changePersonalDataValidate = (values: { username?: string, email?: string }) => {
+  const errors: { username?: string, email?: string } = {}
+  const usernameValidate = usernameValidation(values.username);
+  const emailValidate = emailValidation(values.email);
+  if (usernameValidate) {
+    errors.username = usernameValidate;
+  }
+  if (emailValidate) {
+    errors.email = emailValidate;
+  }
+  return errors
+}
+
+export const updatePasswordValidate = (values: { currentPassword?: string, newPassword?: string }) => {
+  const errors: { currentPassword?: string, newPassword?: string } = {}
+  const currentPasswordValidate = passwordValidation(values.currentPassword);
+  const newPasswordValidate = passwordValidation(values.newPassword);
+  if (currentPasswordValidate) {
+    errors.currentPassword = currentPasswordValidate;
+  }
+  if (newPasswordValidate) {
+    errors.newPassword = newPasswordValidate;
+  }
+  
+  return errors
+}

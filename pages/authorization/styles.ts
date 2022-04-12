@@ -35,22 +35,6 @@ export const AuthorizationLink = styled.a`
   cursor: pointer;
 `
 
-export const TextFieldError = styled.span`
-  position: absolute;
-  right: 26px;
-  margin-top: 26px;
-  font-size: 16px;
-  line-height: 18px;
-  color: ${colors.lightRed};
-`
-
-export const ErrorMessage = styled.p`
-  font-size: 18px;
-  line-height: 20px;
-  margin-bottom: 30px;
-  color: ${colors.lightRed};
-`
-
 export const CheckoutTotalContainer = styled.div`
   display: flex;
   justify-content: space-between;

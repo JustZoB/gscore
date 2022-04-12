@@ -10,4 +10,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${colors.black};
   }
+
+  a {
+    text-decoration: none;
+  }
 `

@@ -2,11 +2,12 @@ import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
 import { signInValidate } from "../../utils/validation";
-import { AuthorizationContainer, ErrorMessage, TextFieldError } from "./styles";
+import { AuthorizationContainer } from "./styles";
 import { H2 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignIn } from "../../store/authorization/actions";
 import { RootState } from "../../store/store";
+import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
 
 export const SignIn: React.FC = () => {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);

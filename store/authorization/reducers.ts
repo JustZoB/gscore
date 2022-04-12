@@ -1,23 +1,42 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { User } from '../../services/axios';
-import { fetchSignIn, fetchSignUp } from './actions';
+import { setAccessToken, UserExport } from '../../services/axios';
+import { fetchSignIn, fetchSignUp, fetchUpdatePassword, fetchUpdatePersonalData } from './actions';
 
 type UserState = {
   nav: 'signup' | 'signin' | 'checkout'
-  user: User | undefined
+  settingsNav: 'personalInfo' | 'changePassword'
+  user: UserExport | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
+  complete: string | undefined
 }
 
 const authorizationAdapter = createEntityAdapter<UserState>();
 
 const authorizationSlice = createSlice({
   name: 'authorizationSlice',
-  initialState: authorizationAdapter.getInitialState<UserState>({ nav: 'signup', user: undefined, loading: 'idle', error: undefined, }),
+  initialState: authorizationAdapter.getInitialState<UserState>({
+    nav: 'signup',
+    user: undefined,
+    loading: 'idle',
+    error: undefined,
+    complete: undefined,
+    settingsNav: 'personalInfo'}
+  ),
   reducers: {
     setNav: (state, action: PayloadAction<'signup' | 'signin' | 'checkout'>) => {
       state.nav = action.payload
       state.error = undefined
+    },
+    setSettingsNav: (state, action: PayloadAction<'personalInfo' | 'changePassword'>) => {
+      state.settingsNav = action.payload
+      state.error = undefined
+      state.complete = undefined
+    },
+    logOut: (state) => {
+      state.user = undefined
+      state.error = undefined
+      setAccessToken('')
     },
   },
   extraReducers: ( builder ) => {
@@ -30,7 +49,8 @@ const authorizationSlice = createSlice({
         state.loading = 'idle'
         state.error = undefined
         state.nav = 'checkout'
-        state.user = { ...state, ...action.payload}
+        state.user = action.payload
+        setAccessToken(action.payload.token)
       })
       .addCase(fetchSignIn.rejected, (state, action) => {
         state.loading = 'failed'
@@ -44,9 +64,37 @@ const authorizationSlice = createSlice({
         state.loading = 'idle'
         state.error = undefined
         state.nav = 'checkout'
-        state.user = { ...state, ...action.payload}
+        state.user = action.payload
+        setAccessToken(action.payload.token)
       })
       .addCase(fetchSignUp.rejected, (state, action) => {
+        state.loading = 'failed'
+        state.error = action.error
+      })
+      .addCase(fetchUpdatePersonalData.pending, (state) => {
+        state.loading = 'loading'
+        state.error = undefined
+      })
+      .addCase(fetchUpdatePersonalData.fulfilled, (state, action) => {
+        state.loading = 'idle'
+        state.error = undefined
+        state.user.user = action.payload
+        state.complete = 'Your date update successfuly'
+      })
+      .addCase(fetchUpdatePersonalData.rejected, (state, action) => {
+        state.loading = 'failed'
+        state.error = action.error
+      })
+      .addCase(fetchUpdatePassword.pending, (state) => {
+        state.loading = 'loading'
+        state.error = undefined
+      })
+      .addCase(fetchUpdatePassword.fulfilled, (state) => {
+        state.loading = 'idle'
+        state.error = undefined
+        state.complete = 'Your date update successfuly'
+      })
+      .addCase(fetchUpdatePassword.rejected, (state, action) => {
         state.loading = 'failed'
         state.error = action.error
       })
@@ -55,6 +103,8 @@ const authorizationSlice = createSlice({
 
 export const {
   setNav,
+  setSettingsNav,
+  logOut,
 } = authorizationSlice.actions;
 
 export default authorizationSlice.reducer;
