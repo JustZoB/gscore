@@ -1,10 +1,10 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { User } from '../../services/axios';
+import { User, UserExport } from '../../services/axios';
 import { fetchSignIn, fetchSignUp } from './actions';
 
 type UserState = {
   nav: 'signup' | 'signin' | 'checkout'
-  user: User | undefined
+  user: UserExport | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
 }

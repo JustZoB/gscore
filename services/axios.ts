@@ -32,4 +32,13 @@ export interface User {
   token: string,
 }
 
+export interface UserExport {
+  user: {
+    id: number;
+    email: string;
+    username: string;
+  }
+  token: string,
+}
+
 export default instance

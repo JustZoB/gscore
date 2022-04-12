@@ -6,14 +6,14 @@ import { GlobalStyle } from "../styles/globals"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <DashboardLayout>
-      <GlobalStyle />
-      <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <DashboardLayout>
+          <GlobalStyle />
           <Component {...pageProps} />
-        </PersistGate>
-      </Provider>
-    </DashboardLayout>
+        </DashboardLayout>
+      </PersistGate>
+    </Provider>
   )
 }
 

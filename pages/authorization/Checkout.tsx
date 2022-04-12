@@ -1,13 +1,9 @@
 import { Button } from "../../components/Button";
-import { AuthorizationContainer, CheckoutTotalContainer, CheckoutTotalText, TextFieldError } from "./styles";
+import { AuthorizationContainer, CheckoutTotalContainer, CheckoutTotalText } from "./styles";
 import { H2 } from "../../components/Titles";
 import { TableBlockContainer, TableBlockContent, TableBlockContentItem, TableBlockContentText, TableBlockHeader, TableBlockHeaderText } from "../../components/TableBlock/styles";
 
 export const Checkout: React.FC = () => {
-  const onSignIn = (values: { email: string, password: string }) => {
-    console.log(values)
-  }
-
   return (
     <AuthorizationContainer>
       <H2 textAlign="left" marginBottom={24}>Checkout</H2>
