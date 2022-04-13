@@ -40,7 +40,8 @@ const paymentSlice = createSlice({
       .addCase(fetchBuy.fulfilled, (state, action) => {
         state.loading = 'idle'
         state.error = undefined
-        state.subscribe = action.payload
+        state.subscribe = action.payload.subscribe
+        action.payload.callBack()
       })
       .addCase(fetchBuy.rejected, (state, action) => {
         state.loading = 'failed'

@@ -1,41 +1,33 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { setNav } from "../../store/authorization/reducers";
 import { RootState } from "../../store/store";
 import { AuthtorizationNavbarItem } from "./AuthtorizationNavbarItem";
 
 export const AuthtorizationNavbar: React.FC = () => {
-  const dispatch = useDispatch();
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
-
-  const navigateToSignIn: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (!authorization.user) {
-      dispatch(setNav('signin'))
-    }
-  }
-  const navigateToSignUp: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (!authorization.user) {
-      dispatch(setNav('signup'))
-    }
-  }
+  const router = useRouter();
 
   return (
     <AuthtorizationNavbarWrap>
       <AuthtorizationNavbarContainer>
-        <AuthtorizationNavbarItem
-          onClick={navigateToSignUp}
-          active={authorization.nav === 'signup'}
-        >
-          Create account
+        <AuthtorizationNavbarItem active={true}>
+          {authorization.user
+            ? <>Create account</>
+            : <Link href="/authorization/sign-up">Create account</Link>
+          }
         </AuthtorizationNavbarItem>
-        <AuthtorizationNavbarItem
-          onClick={navigateToSignIn}
-          active={authorization.nav === 'signin'}
-        >
-          Log in
+        <AuthtorizationNavbarItem active={router.route === '/authorization/sign-in' || router.route === '/authorization/checkout'}>
+          {authorization.user
+            ? <>Log in</>
+            : <Link href="/authorization/sign-in">Log in</Link>
+          }
         </AuthtorizationNavbarItem>
-        <AuthtorizationNavbarItem active={authorization.nav === 'checkout'}>Checkout</AuthtorizationNavbarItem>
+        <AuthtorizationNavbarItem active={router.route === '/authorization/checkout'}>
+          Checkout
+        </AuthtorizationNavbarItem>
       </AuthtorizationNavbarContainer>
     </AuthtorizationNavbarWrap>
   )

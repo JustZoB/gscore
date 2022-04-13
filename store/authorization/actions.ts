@@ -3,17 +3,17 @@ import axios, { SignIn, SignUp, UpdatePassword, UpdatePersonalData, User, UserEx
 
 export const fetchSignIn = createAsyncThunk(
   'authorizationSlice/fetchSignIn',
-  async ({ email, password }: SignIn ) => {
+  async ({ email, password, callBack }: SignIn ) => {
     const response = await axios.post<UserExport>(`/users/sign-in`, { email, password })
-    return response.data;
+    return { user: response.data, callBack };
   }
 );
 
 export const fetchSignUp = createAsyncThunk(
   'authorizationSlice/fetchSignUp',
-  async ( { email, username, password }: SignUp ) => {
+  async ( { email, username, password, callBack }: SignUp ) => {
     const response = await axios.post<UserExport>(`/users/sign-up`, { email, username, password })
-    return response.data;
+    return { user: response.data, callBack };
   }
 );
 

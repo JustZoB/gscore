@@ -12,6 +12,7 @@ export const AuthorizationContainer = styled.div`
   width: 620px;
   justify-self: center;
 `
+
 export const HaveAnAccountContainer = styled.div`
   display: flex;
   margin-top: 48px;

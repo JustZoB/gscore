@@ -4,12 +4,11 @@ import colors from "../../utils/colors";
 
 export interface ItemProps {
   active: boolean;
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active, onClick}) => {
+export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active}) => {
   return (
-    <ItemContainer active={active} onClick={onClick}>
+    <ItemContainer active={active}>
       <ItemText>{children}</ItemText>
       <ItemLine active={active} />
     </ItemContainer>

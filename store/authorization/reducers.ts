@@ -3,8 +3,6 @@ import { setAccessToken, UserExport } from '../../services/axios';
 import { fetchSignIn, fetchSignUp, fetchUpdatePassword, fetchUpdatePersonalData } from './actions';
 
 type UserState = {
-  nav: 'signup' | 'signin' | 'checkout'
-  settingsNav: 'personalInfo' | 'changePassword'
   user: UserExport | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
@@ -16,23 +14,12 @@ const authorizationAdapter = createEntityAdapter<UserState>();
 const authorizationSlice = createSlice({
   name: 'authorizationSlice',
   initialState: authorizationAdapter.getInitialState<UserState>({
-    nav: 'signup',
     user: undefined,
     loading: 'idle',
     error: undefined,
     complete: undefined,
-    settingsNav: 'personalInfo',
   }),
   reducers: {
-    setNav: (state, action: PayloadAction<'signup' | 'signin' | 'checkout'>) => {
-      state.nav = action.payload
-      state.error = undefined
-    },
-    setSettingsNav: (state, action: PayloadAction<'personalInfo' | 'changePassword'>) => {
-      state.settingsNav = action.payload
-      state.error = undefined
-      state.complete = undefined
-    },
     logOut: (state) => {
       state.user = undefined
       state.error = undefined
@@ -48,9 +35,9 @@ const authorizationSlice = createSlice({
       .addCase(fetchSignIn.fulfilled, (state, action) => {
         state.loading = 'idle'
         state.error = undefined
-        state.nav = 'checkout'
-        state.user = action.payload
-        setAccessToken(action.payload.token)
+        state.user = action.payload.user
+        setAccessToken(action.payload.user.token)
+        action.payload.callBack()
       })
       .addCase(fetchSignIn.rejected, (state, action) => {
         state.loading = 'failed'
@@ -63,9 +50,9 @@ const authorizationSlice = createSlice({
       .addCase(fetchSignUp.fulfilled, (state, action) => {
         state.loading = 'idle'
         state.error = undefined
-        state.nav = 'checkout'
-        state.user = action.payload
-        setAccessToken(action.payload.token)
+        state.user = action.payload.user
+        setAccessToken(action.payload.user.token)
+        action.payload.callBack()
       })
       .addCase(fetchSignUp.rejected, (state, action) => {
         state.loading = 'failed'
@@ -102,8 +89,6 @@ const authorizationSlice = createSlice({
 });
 
 export const {
-  setNav,
-  setSettingsNav,
   logOut,
 } = authorizationSlice.actions;
 
