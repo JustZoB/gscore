@@ -1,17 +1,6 @@
 import styled from "styled-components";
 import colors from "../../utils/colors";
 
-export const AuthorizationWrap = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`
-
-export const AuthorizationContainer = styled.div`
-  position: relative;
-  width: 620px;
-  justify-self: center;
-`
 export const HaveAnAccountContainer = styled.div`
   display: flex;
   margin-top: 48px;

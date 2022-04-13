@@ -1,32 +1,15 @@
-import { H2 } from "../../components/Titles";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { SettingsContainer } from "./styles";
-import { UpdateDataForm } from "./UpdateDataForm";
-import { UpdatePassword } from "./UpdatePassword";
-import Link from 'next/link'
-import { SettingsNavbar } from "./SettingsNavbar";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Settings() {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
+  const router = useRouter();
 
-  return (
-    <SettingsContainer>
-      <H2 textAlign="left" marginBottom={48}>Settings</H2>
-      {authorization.user ?
-        <>
-        {authorization.user.token &&
-          <>
-            <SettingsNavbar />
-            {authorization.settingsNav === 'personalInfo' && <UpdateDataForm />}
-            {authorization.settingsNav === 'changePassword' && <UpdatePassword />}
-          </>
-        }
-        </>
-      :
-      <Link href="/authorization">Please login</Link>
-    }
-      
-    </SettingsContainer>
-  )
+  useEffect(() => {
+    authorization.user
+    ? router.push('/settings/update-data-form')
+    : router.push('/')
+  }, [authorization, router])
 }

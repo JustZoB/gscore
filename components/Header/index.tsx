@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { logOut, setNav } from "../../store/authorization/reducers";
+import { logOut} from "../../store/authorization/reducers";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,6 @@ export const Header: React.FC = () => {
 
   const handleLogOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
     dispatch(logOut())
-    dispatch(setNav('signin'))
   }
 
   return (

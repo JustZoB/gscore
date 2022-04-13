@@ -1,29 +1,15 @@
-import { AuthorizationWrap } from "./styles";
-import { Checkout } from "./Checkout";
-import { SignIn } from "./SignIn";
-import { SignUp } from "./SignUp";
-import { AuthtorizationNavbar } from "../../components/AuthtorizationNavbar";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Authorization() {
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
+  const router = useRouter();
 
-  return (
-    <>
-      <AuthtorizationNavbar />
-      <AuthorizationWrap>
-        {authorization.user ?
-          <>
-            {authorization.user.token && <Checkout />}
-          </>
-          :
-          <>
-            {authorization.nav === 'signup' && <SignUp />}
-            {authorization.nav === 'signin' && <SignIn />}
-          </>
-        }
-      </AuthorizationWrap>
-    </>
-  )
+  useEffect(() => {
+    authorization.user
+    ? router.push('/authorization/checkout')
+    : router.push('/authorization/sign-up')
+  }, [authorization, router])
 }

@@ -18,12 +18,14 @@ export const setAccessToken = (accessToken: string) => {
 export interface SignIn {
   email: string,
   password: string,
+  callBack?: Function,
 }
 
 export interface SignUp {
   email: string,
   username: string,
   password: string,
+  callBack?: Function,
 }
 
 export interface UpdatePersonalData {
@@ -45,6 +47,32 @@ export interface User {
 export interface UserExport {
   user: User,
   token: string,
+}
+
+export interface Product {
+  id: number,
+  sitesCount: number,
+  name: string,
+  prices: Price[],
+}
+
+export interface Price {
+  id: number,
+  isActive: boolean,
+  productId: number,
+  price: string,
+}
+
+export interface Checkout {
+  priceId: number,
+  callBack?: Function,
+}
+
+export interface Subscribe {
+  id: number,
+  userId: number,
+  currentPeriodStart: number,
+  currentPeriodEnd: number,
 }
 
 export default instance

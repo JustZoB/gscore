@@ -4,7 +4,6 @@ import colors from "../../utils/colors";
 export const SettingsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
 `
 
 export const FormContainer = styled.div`
