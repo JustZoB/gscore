@@ -1,13 +1,20 @@
 import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Product } from "../../services/axios";
+import { setPayment } from "../../store/payment/reducers";
 import colors from "../../utils/colors";
 import { Button } from "../Button";
 import { H1, H3 } from "../Titles";
 import { CardBuyList } from "./CardBuyList";
 
 export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices }) => {
+  const dispatch = useDispatch();
+
+  const onChoose = () => {
+    dispatch(setPayment({ sitesCount, price: prices[0] }))
+  }
   return (
     <CardBuyContainer>
       <H1 marginBottom={0}>{prices[0].price}$</H1>
@@ -22,6 +29,7 @@ export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices }) => 
             label="Get Gscore"
             theme="secondary"
             size="big"
+            onClick={onChoose}
           />
         </a>
       </Link>

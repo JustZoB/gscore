@@ -61,4 +61,11 @@ export interface Price {
   price: string,
 }
 
+export interface Subscribe {
+  id: number,
+  userId: number,
+  currentPeriodStart: number,
+  currentPeriodEnd: number,
+}
+
 export default instance

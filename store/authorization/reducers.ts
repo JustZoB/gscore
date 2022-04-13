@@ -21,8 +21,8 @@ const authorizationSlice = createSlice({
     loading: 'idle',
     error: undefined,
     complete: undefined,
-    settingsNav: 'personalInfo'}
-  ),
+    settingsNav: 'personalInfo',
+  }),
   reducers: {
     setNav: (state, action: PayloadAction<'signup' | 'signin' | 'checkout'>) => {
       state.nav = action.payload

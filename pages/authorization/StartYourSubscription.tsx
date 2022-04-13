@@ -1,22 +1,23 @@
+import Link from "next/link";
 import { Button } from "../../components/Button";
-import { AuthorizationContainer, CheckoutTotalContainer, CheckoutTotalText } from "./styles";
+import { AuthorizationContainer, } from "./styles";
 import { H2 } from "../../components/Titles";
 import { TableBlockContainer, TableBlockContent, TableBlockContentItem, TableBlockContentText, TableBlockHeader, TableBlockHeaderText } from "../../components/TableBlock/styles";
 import { RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchBuy } from "../../store/payment/actions";
+import { useDispatch, useSelector } from "react-redux"
+import { clearSubscribe } from "../../store/payment/reducers";
 
-export const Checkout: React.FC = () => {
+export const StartYourSubscription: React.FC = () => {
   const payment = useSelector((state: RootState) => state.paymentSlice);
   const dispatch = useDispatch();
 
-  const onPurchase = () => {
-    dispatch(fetchBuy(payment.price.id))
+  const handleClick = () => {
+    dispatch(clearSubscribe())
   }
 
   return (
     <AuthorizationContainer>
-      <H2 textAlign="left" marginBottom={24}>Checkout</H2>
+      <H2 textAlign="left" marginBottom={16}>Start your subscription</H2>
       <TableBlockContainer>
         <TableBlockHeader>
           <TableBlockHeaderText>Package name</TableBlockHeaderText>
@@ -33,19 +34,17 @@ export const Checkout: React.FC = () => {
           </TableBlockContentItem>
         </TableBlockContent>
       </TableBlockContainer>
-      <CheckoutTotalContainer>
-        <CheckoutTotalText>Total:</CheckoutTotalText>
-          {payment.price &&
-            <CheckoutTotalText>{payment.price.price}$</CheckoutTotalText>
-          }
-      </CheckoutTotalContainer>
-      {payment.price &&
-        <Button
-          label="Purchase"
-          theme="primary"
-          onClick={onPurchase}
-        />
-      }
+      <Link href="/my-subscriptions" passHref>
+        <a>
+          <Button
+            label="Go to my subscriptions"
+            theme="primary"
+            size="big"
+            onClick={handleClick}
+          />
+        </a>
+      </Link>
+        
     </AuthorizationContainer>
   )
 }
