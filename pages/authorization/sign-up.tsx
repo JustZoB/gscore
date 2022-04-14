@@ -104,8 +104,11 @@ export default function SignUp() {
             <AuthorizationText fontSize={16}>
               Have an account?
             </AuthorizationText>
-            <Link href="/authorization/sign-in">
+
+            <Link href="/authorization/sign-in" passHref>
+              <AuthorizationLink>
               Go to the next step
+              </AuthorizationLink>
             </Link>
           </HaveAnAccountContainer>
         </Container>
