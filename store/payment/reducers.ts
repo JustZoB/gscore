@@ -1,11 +1,11 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { Price, Subscribe } from '../../services/axios';
+import { Price, SubscribeProduct } from '../../services/axios';
 import { fetchBuy } from './actions';
 
 type UserState = {
   sitesCount: number | undefined
   price: Price | undefined
-  subscribe: Subscribe | undefined
+  subscribe: SubscribeProduct | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
 }
