@@ -3,6 +3,10 @@ import { H2 } from "../components/Titles";
 import styled from "styled-components";
 import colors from '../utils/colors';
 import axios, { Product } from "../services/axios";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { clearing } from "../store/authorization/reducers";
 
 export async function getServerSideProps() {
   const response = await axios.get<Product[]>(`/products`)
@@ -11,6 +15,17 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ products }) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleStart = () => {
+      dispatch(clearing())
+    }
+
+    router.events.on('routeChangeComplete', handleStart)
+  }, [router, dispatch])
+
   return (
     <>
       <H2>Get started with Gscore today!</H2>
