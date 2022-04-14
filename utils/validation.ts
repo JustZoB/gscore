@@ -23,6 +23,14 @@ export const tooLong = (string: string, maxLenght:number = 20) => {
   return false
 }
 
+export const tooSmall = (string: string, minLenght:number = 6) => {
+  if (string && string.length < minLenght) {
+    return true
+  }
+
+  return false
+}
+
 export const emailValidation = (email: string) => {
   const errors: { email?: string } = {};
   
@@ -58,11 +66,33 @@ export const passwordValidation = (password: string) => {
   if (tooLong(password)) {
     errors.password = 'Too long';
   }
+  if (tooSmall(password)) {
+    errors.password = 'Too small';
+  }
   if (isEmpty(password)) {
     errors.password = 'Required';
   }
 
   return errors.password
+}
+
+export const newPasswordValidation = (currentPassword: string, newPassword: string) => {
+  const errors: { newPassword?: string } = {};
+
+  if (currentPassword === newPassword) {
+    errors.newPassword = 'Passwords match';
+  }
+  if (tooLong(newPassword)) {
+    errors.newPassword = 'Too long';
+  }
+  if (tooSmall(newPassword)) {
+    errors.newPassword = 'Too small';
+  }
+  if (isEmpty(newPassword)) {
+    errors.newPassword = 'Required';
+  }
+
+  return errors.newPassword
 }
 
 export const signInValidate = (values: { email?: string, password?: string }) => {
@@ -111,7 +141,7 @@ export const changePersonalDataValidate = (values: { username?: string, email?: 
 export const updatePasswordValidate = (values: { currentPassword?: string, newPassword?: string }) => {
   const errors: { currentPassword?: string, newPassword?: string } = {}
   const currentPasswordValidate = passwordValidation(values.currentPassword);
-  const newPasswordValidate = passwordValidation(values.newPassword);
+  const newPasswordValidate = newPasswordValidation(values.currentPassword, values.newPassword);
   if (currentPasswordValidate) {
     errors.currentPassword = currentPasswordValidate;
   }
