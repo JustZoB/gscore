@@ -16,7 +16,7 @@ export interface CodeItemProps {
 export const CodeItem = styled.div<CodeItemProps>`
   display: flex;
   flex-direction: column;
-  flex: ${(props) => (props.full ? 1 : 'unset')};;
+  flex: ${(props) => (props.full ? 1 : 'unset')};
 
   &:not(:last-child) {
     margin-right: 32px;
