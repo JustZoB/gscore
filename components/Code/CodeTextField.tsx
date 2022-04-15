@@ -17,7 +17,7 @@ export const CodeTextField: React.FC<TextFieldProps> = (props) => {
 
   return (
     <TextFieldContainer>
-      <TextField {...props}/>
+      <TextField {...props} readOnly />
       {props.copy &&
         <CopyButton onClick={copyValue}>
           <Image
