@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${colors.black};
+    overflow-x: hidden;
   }
 
   a {
