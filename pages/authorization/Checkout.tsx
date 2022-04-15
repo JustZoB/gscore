@@ -44,7 +44,7 @@ export default function Checkout() {
       <Wrap>
         <Container>
           <H2 textAlign="left" marginBottom={24}>Checkout</H2>
-          <TableBlockContainer>
+          <TableBlockContainer theme='dark'>
             <TableBlockHeader>
               <TableBlockHeaderText>Package name</TableBlockHeaderText>
               <TableBlockHeaderText>Price</TableBlockHeaderText>

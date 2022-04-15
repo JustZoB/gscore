@@ -4,6 +4,7 @@ import { CodeContainer, CodeItem, CodeItemContent, CodeItemHeader } from "./styl
 import { CodeTextField } from "./CodeTextField";
 import { Checkbox } from "../Checkbox";
 import CodeStatus from "../../utils/codeStatus";
+import { Button } from "../Button";
 
 export interface CodeProps {
   id: number,
@@ -14,15 +15,16 @@ export interface CodeProps {
 
 export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const domain = origin === null ? '' : origin;
 
   const changeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(!isChecked)
   }
-  
+
   return (
     <CodeContainer>
       <CodeItem>
-        <CodeItemHeader></CodeItemHeader>
+        <CodeItemHeader />
         <CodeItemContent>
           <Checkbox checked={isChecked} onChange={changeCheckbox} />
         </CodeItemContent>
@@ -30,15 +32,26 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
       <CodeItem>
         <CodeItemHeader>License code</CodeItemHeader>
         <CodeItemContent>
-          <CodeTextField placeholder="License code" value={code} copy={true} />
+          <CodeTextField placeholder="" value={code} copy={true} />
         </CodeItemContent>
       </CodeItem>
       <CodeItem full>
         <CodeItemHeader>Domain</CodeItemHeader>
         <CodeItemContent>
-          <CodeTextField placeholder="Domain" value={origin}/>
+          <CodeTextField placeholder="" value={domain}/>
         </CodeItemContent>
       </CodeItem>
+      {status === CodeStatus.INACTIVE &&
+        <CodeItem>
+          <CodeItemHeader />
+          <CodeItemContent>
+            <Button
+              label="Activate"
+              theme="secondary"
+            />
+          </CodeItemContent>
+        </CodeItem>
+      }
       <CodeItem>
         <CodeItemHeader>Status</CodeItemHeader>
         <CodeItemContent>

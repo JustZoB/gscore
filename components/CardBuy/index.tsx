@@ -23,7 +23,7 @@ export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices }) => 
         Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
       </CardBuyText>
       <CardBuyList isEven={id % 2 === 1} sitesCount={sitesCount} />
-      <Link href="/authorization" passHref>
+      <Link href="/authorization/sign-up" passHref>
         <a>
           <Button
             label="Get Gscore"

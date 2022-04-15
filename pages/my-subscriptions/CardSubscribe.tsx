@@ -20,11 +20,12 @@ export interface CardSubscribeProps {
   currentPeriodEnd: number,
   status: CodeStatus,
   product: Product,
+  active: boolean,
 }
 
-export const CardSubscribe: React.FC<CardSubscribeProps> = ({ id, currentPeriodStart, currentPeriodEnd, status, product }) => {
+export const CardSubscribe: React.FC<CardSubscribeProps> = ({ id, currentPeriodStart, currentPeriodEnd, status, product, active }) => {
   return (
-    <TableBlockContainer>
+    <TableBlockContainer active={active}>
       <TableBlockHeader>
         <TableBlockHeaderText>Gscore</TableBlockHeaderText>
         <TableBlockHeaderText>
@@ -35,10 +36,10 @@ export const CardSubscribe: React.FC<CardSubscribeProps> = ({ id, currentPeriodS
         <TableBlockContentItem>
           <TableBlockContentItemContainer>
             <TableBlockContentText>
-              {product.sitesCount} sites license, valid until
+              {product.sitesCount} sites license
             </TableBlockContentText>
             <TableBlockContentDate>
-              {new Date(currentPeriodStart * 1000).toLocaleDateString()}
+              valid until {new Date(currentPeriodEnd * 1000).toLocaleDateString()}
             </TableBlockContentDate>
           </TableBlockContentItemContainer>
           <TableBlockContentText>{product.prices[0].price}$</TableBlockContentText>

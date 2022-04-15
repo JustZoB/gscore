@@ -1,15 +1,22 @@
 import styled from "styled-components";
 import colors from "../../utils/colors";
 
-export const TableBlockContainer = styled.div`
+interface ContainerProps {
+  active?: boolean,
+  theme?: 'dark' | 'light',
+}
+
+export const TableBlockContainer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   padding: 48px 0;
-  background-color: ${colors.darkerGray};
+  background-color: ${(props) => (props.theme === 'dark' ? colors.darkerGray : colors.darkGray)};
   border-radius: 12px;
   margin-bottom: 24px;
-  
+  opacity: ${(props) => (props.active === false ? 0.6 : 1)};
+  transition: 0.3s;
 `
+
 export const TableBlockHeader = styled.div`
   display: flex;
   justify-content: space-between;
