@@ -21,7 +21,7 @@ const theme = {
   'INACTIVE': colors.red,
 }
 
-const StyledStatus = styled.div<StatusProps>`
+const StyledStatus = styled.span<StatusProps>`
   color: ${(props) => (theme[props.status])};
   text-transform: lowercase;
   text-transform: capitalize;
