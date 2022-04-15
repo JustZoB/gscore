@@ -2,7 +2,7 @@ import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from
 import { Price, SubscribeProduct } from '../../services/axios';
 import { fetchBuy } from './actions';
 
-type UserState = {
+type PaymentState = {
   sitesCount: number | undefined
   price: Price | undefined
   subscribe: SubscribeProduct | undefined
@@ -10,11 +10,11 @@ type UserState = {
   error: SerializedError | undefined
 }
 
-const paymentAdapter = createEntityAdapter<UserState>();
+const paymentAdapter = createEntityAdapter<PaymentState>();
 
 const paymentSlice = createSlice({
   name: 'paymentSlice',
-  initialState: paymentAdapter.getInitialState<UserState>({
+  initialState: paymentAdapter.getInitialState<PaymentState>({
     sitesCount: undefined,
     price: undefined,
     subscribe: undefined,
