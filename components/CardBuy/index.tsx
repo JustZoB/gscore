@@ -1,15 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Product } from "../../services/axios";
 import { setPayment } from "../../store/payment/reducers";
+import { RootState } from "../../store/store";
 import colors from "../../utils/colors";
 import { Button } from "../Button";
 import { H1, H3 } from "../Titles";
 import { CardBuyList } from "./CardBuyList";
 
 export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices }) => {
+  const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const dispatch = useDispatch();
 
   const onChoose = () => {
@@ -23,16 +25,28 @@ export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices }) => 
         Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
       </CardBuyText>
       <CardBuyList isEven={id % 2 === 1} sitesCount={sitesCount} />
-      <Link href="/authorization/sign-up" passHref>
-        <a>
-          <Button
-            label="Get Gscore"
-            theme="secondary"
-            size="big"
-            onClick={onChoose}
-          />
-        </a>
-      </Link>
+      {authorization.user
+      ? <Link href="/authorization/checkout" passHref>
+          <a>
+            <Button
+              label="Get Gscore"
+              theme="secondary"
+              size="big"
+              onClick={onChoose}
+            />
+          </a>
+        </Link>
+      : <Link href="/authorization/sign-up" passHref>
+          <a>
+            <Button
+              label="Get Gscore"
+              theme="secondary"
+              size="big"
+              onClick={onChoose}
+            />
+          </a>
+        </Link>
+      }
     </CardBuyContainer>
   )
 }
