@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "./styles";
 
-interface TextFieldProps {
+export interface TextFieldProps {
   placeholder: string;
   name: string;
   onBlur: (event?: React.FocusEvent<HTMLElement, Element>) => void;
@@ -11,6 +11,7 @@ interface TextFieldProps {
   value: any;
   checked?: boolean;
   multiple?: boolean;
+  errors: Object | undefined;
 }
 
 export const TextField: React.FC<TextFieldProps> = (props) => {

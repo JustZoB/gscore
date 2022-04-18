@@ -48,6 +48,7 @@ export default function SignIn() {
                       <>
                         <TextField
                           {...input}
+                          errors={meta.error}
                           placeholder='Email'
                         />
                         {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -63,6 +64,7 @@ export default function SignIn() {
                       <>
                         <TextField
                           {...input}
+                          errors={meta.error}
                           type='password'
                           placeholder='Password'
                         />

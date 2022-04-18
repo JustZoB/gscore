@@ -52,6 +52,7 @@ export default function SignUp() {
                         <>
                           <TextField
                             {...input}
+                            errors={meta.error}
                             placeholder='Username'
                           />
                           {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -67,6 +68,7 @@ export default function SignUp() {
                       <>
                         <TextField
                           {...input}
+                          errors={meta.error}
                           placeholder='Email'
                         />
                         {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -82,6 +84,7 @@ export default function SignUp() {
                       <>
                         <TextField
                           {...input}
+                          errors={meta.error}
                           type='password'
                           placeholder='Password'
                         />
