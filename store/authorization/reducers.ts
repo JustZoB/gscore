@@ -47,6 +47,7 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchSignUp.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
@@ -62,6 +63,7 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchUpdatePersonalData.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
@@ -77,6 +79,7 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchUpdatePassword.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
