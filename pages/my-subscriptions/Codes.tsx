@@ -12,9 +12,9 @@ export const Codes: React.FC<CodesProps> = ({ subscribes }) => {
   const subscribesSlice = useSelector((state: RootState) => state.subscribesSlice);
 
   return (
-    <CodesContainer>
+    <>
       {subscribes.map(({ codes }, index ) => (
-        <>
+        <CodesContainer key={index}>
         {index + 1 === subscribesSlice.paginationActiveElement &&
           codes.map(({ id, code, origin, status}) => (
             <Code
@@ -26,9 +26,9 @@ export const Codes: React.FC<CodesProps> = ({ subscribes }) => {
             />
           ))
         }
-        </>
+        </CodesContainer>
       ))}
-    </CodesContainer>
+    </>
   )
 }
 

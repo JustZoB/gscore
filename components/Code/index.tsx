@@ -15,7 +15,7 @@ export interface CodeProps {
 
 export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const domain = origin === null ? '' : origin;
+  const [domain, setDomain] = useState<string>(origin === null ? '' : origin);
 
   const changeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(!isChecked)
@@ -32,13 +32,16 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
       <CodeItem>
         <CodeItemHeader>License code</CodeItemHeader>
         <CodeItemContent>
-          <CodeTextField placeholder="" value={code} copy={true} />
+          <CodeTextField placeholder="" value={code} copy={true} readOnly={true} />
         </CodeItemContent>
       </CodeItem>
       <CodeItem full>
         <CodeItemHeader>Domain</CodeItemHeader>
         <CodeItemContent>
-          <CodeTextField placeholder="" value={domain}/>
+          {status === CodeStatus.ACTIVE
+          ? <CodeTextField placeholder="" value={domain} readOnly={true} />
+          : <CodeTextField placeholder="" value={domain} onChange={(e) => setDomain(e.target.value)} />
+        }
         </CodeItemContent>
       </CodeItem>
       {status === CodeStatus.INACTIVE &&

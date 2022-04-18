@@ -8,6 +8,8 @@ interface TextFieldProps {
   placeholder: string;
   value: string;
   copy?: boolean;
+  readOnly?: boolean;
+  onChange?: (event: any) => void;
 }
 
 export const CodeTextField: React.FC<TextFieldProps> = (props) => {
@@ -17,7 +19,7 @@ export const CodeTextField: React.FC<TextFieldProps> = (props) => {
 
   return (
     <TextFieldContainer>
-      <TextField {...props} readOnly />
+      <TextField {...props} />
       {props.copy &&
         <CopyButton onClick={copyValue}>
           <Image
