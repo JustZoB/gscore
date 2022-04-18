@@ -1,4 +1,3 @@
-import axios, { Subscribe } from "../../services/axios";
 import styled from "styled-components";
 import { Button } from "../../components/Button";
 import { H1 } from "../../components/Titles";
@@ -30,7 +29,7 @@ export default function MySubscriptions() {
           />
         }
       </MySubscriptionsHeader>
-      {subscribesSlice.loading === 'loading'
+      {subscribesSlice.loading === 'loading' && !subscribesSlice.subscribes
         ? <Loader />
         : <>
           {subscribesSlice.subscribes ?
