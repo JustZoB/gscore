@@ -10,6 +10,8 @@ export const Loader: React.FC = () => {
         src={loader}
         alt='Loader'
         layout="fixed"
+        width={50}
+        height={50}
       />
     </LoaderContainer>
   )
