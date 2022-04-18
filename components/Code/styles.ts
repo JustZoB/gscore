@@ -39,3 +39,13 @@ export const CodeItemContent = styled.div`
   align-items: center;
   justify-content: center;
 `
+
+export const DomainFieldContainer = styled.div`
+  position: relative;
+  flex: 3;
+  margin-right: 10px;
+`
+
+export const CodeErrorMessageContainer = styled.div`
+  position: absolute;
+`

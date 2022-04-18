@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { Subscribe } from '../../services/axios';
-import { fetchGetSubscribes } from './actions';
+import { fetchActiveCode, fetchGetSubscribes } from './actions';
 
 type SubscribesState = {
   subscribes: Subscribe[] | undefined
@@ -46,6 +46,32 @@ const subscribesSlice = createSlice({
         state.paginationLength = action.payload.subscribes.length
       })
       .addCase(fetchGetSubscribes.rejected, (state, action) => {
+        state.loading = 'failed'
+        state.error = action.error
+      })
+
+      .addCase(fetchActiveCode.pending, (state) => {
+        state.loading = 'loading'
+        state.error = undefined
+      })
+      .addCase(fetchActiveCode.fulfilled, (state, action) => {
+        state.loading = 'idle'
+        state.error = undefined
+        state.subscribes = state.subscribes.map(subscribe => {
+          if (subscribe.id === action.payload.code.subscribeId) {
+            subscribe.codes = subscribe.codes.map(code => {
+              if (code.id === action.payload.code.id) {
+                return action.payload.code
+              }
+
+              return code
+            })
+          }
+
+          return subscribe
+        })
+      })
+      .addCase(fetchActiveCode.rejected, (state, action) => {
         state.loading = 'failed'
         state.error = action.error
       })

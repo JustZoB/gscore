@@ -3,6 +3,11 @@ export const validateEmail = (email: string) => {
   return re.test(email);
 }
 
+export const isDomain = (domain: string) => {
+  let re = /[-a-zA-Z0-9@:%_\+.~#?&\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/=]*)?/gi;
+  return re.test(domain);
+}
+
 export const isEmpty = (string: string) => {
   if (string) {
     if (string.trim() === '') {
@@ -74,6 +79,19 @@ export const passwordValidation = (password: string) => {
   }
 
   return errors.password
+}
+
+export const domainValidation = (domain: string) => {
+  const errors: { domain?: string } = {};
+
+  if (!isDomain(domain)) {
+    errors.domain = 'It is not domain';
+  }
+  if (isEmpty(domain)) {
+    errors.domain = 'Required';
+  }
+
+  return errors.domain
 }
 
 export const newPasswordValidation = (currentPassword: string, newPassword: string) => {
@@ -149,5 +167,15 @@ export const updatePasswordValidate = (values: { currentPassword?: string, newPa
     errors.newPassword = newPasswordValidate;
   }
   
+  return errors
+}
+
+export const domainValidate = (values: { domain?: string }) => {
+  const errors: { domain?: string } = {}
+  const domain = domainValidation(values.domain);
+  if (domain) {
+    errors.domain = domain;
+  }
+
   return errors
 }

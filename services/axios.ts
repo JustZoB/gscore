@@ -96,4 +96,9 @@ export interface Code {
   userId: number,
 }
 
+export interface ActivateCode {
+  code: string,
+  origin: string,
+}
+
 export default instance

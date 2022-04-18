@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { StatusText } from "./CodeStatusText";
-import { CodeContainer, CodeItem, CodeItemContent, CodeItemHeader } from "./styles";
+import { CodeContainer, CodeErrorMessageContainer, CodeItem, CodeItemContent, CodeItemHeader, DomainFieldContainer } from "./styles";
 import { CodeTextField } from "./CodeTextField";
 import { Checkbox } from "../Checkbox";
 import CodeStatus from "../../utils/codeStatus";
 import { Button } from "../Button";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchActiveCode } from "../../store/subscribes/actions";
+import { Field, Form } from "react-final-form";
+import { RootState } from "../../store/store";
+import { ErrorMessage, TextFieldError } from "../TextField/styles";
+import { domainValidate } from "../../utils/validation";
+import { Loader } from "../Loader";
 
 export interface CodeProps {
   id: number,
@@ -14,11 +21,21 @@ export interface CodeProps {
 }
 
 export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
+  const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
-  const [domain, setDomain] = useState<string>(origin === null ? '' : origin);
+  const subscribesSlice = useSelector((state: RootState) => state.subscribesSlice);
+  const domain = origin === null ? '' : origin;
+  const DOMAIN_FIELD = 'domain';
 
   const changeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(!isChecked)
+  }
+
+  const onActivateCode = (values: { domain: string }) => {
+    dispatch(fetchActiveCode({
+      origin: values.domain,
+      code,
+    }));
   }
 
   return (
@@ -40,11 +57,49 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
         <CodeItemContent>
           {status === CodeStatus.ACTIVE
           ? <CodeTextField placeholder="" value={domain} readOnly={true} />
-          : <CodeTextField placeholder="" value={domain} onChange={(e) => setDomain(e.target.value)} />
+          : <Form
+              onSubmit={onActivateCode}
+              validate={domainValidate}
+              render={({ handleSubmit }) => (
+                <>
+                  <DomainFieldContainer>
+                    <Field
+                      name={DOMAIN_FIELD}
+                      render={({ input, meta }) => (
+                        <>
+                          <CodeTextField {...input} placeholder="" />
+                          {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                        </>
+                      )}
+                    />
+
+                    {/* {subscribesSlice.error &&
+                      <CodeErrorMessageContainer>
+                        <ErrorMessage>{subscribesSlice.error.message}</ErrorMessage>
+                      </CodeErrorMessageContainer>
+                    } */}
+                  </DomainFieldContainer>
+
+                  {subscribesSlice.loading === 'loading'
+                  ? <Loader />
+                  : <Button
+                      label="Activate"
+                      theme="secondary"
+                      onClick={handleSubmit}
+                    />
+                  }
+                  {/* <Button
+                    label="Activate"
+                    theme="secondary"
+                    onClick={handleSubmit}
+                  /> */}
+                </>
+              )}
+            />
         }
         </CodeItemContent>
       </CodeItem>
-      {status === CodeStatus.INACTIVE &&
+      {/* {status === CodeStatus.INACTIVE &&
         <CodeItem>
           <CodeItemHeader />
           <CodeItemContent>
@@ -54,7 +109,7 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
             />
           </CodeItemContent>
         </CodeItem>
-      }
+      } */}
       <CodeItem>
         <CodeItemHeader>Status</CodeItemHeader>
         <CodeItemContent>
