@@ -1,5 +1,7 @@
 import axios from 'axios';
 import CodeStatus from '../utils/codeStatus';
+import { RootState } from '../store/store';
+import { logOut } from '../store/authorization/reducers';
 
 const baseURL = 'https://gscore-back.herokuapp.com/api/';
 const instance = axios.create({ baseURL: baseURL });
@@ -15,6 +17,53 @@ export const setAccessToken = (accessToken: string) => {
     }
   )
 }
+
+export const AxiosInterceptors = {
+  setup: (store: any) => {
+    instance.interceptors.request.use(
+      (config) => {
+        const state = <RootState>store?.getState();
+        const accessToken = state ? state.authorizationSlice.user.token : null;
+
+        if (!accessToken) {
+          return config;
+        }
+
+        const headers = {
+          ...config.headers,
+          Authorization: `Bearer ${accessToken}`,
+        };
+
+        return { ...config, headers };
+      },
+      (error) => {
+        return Promise.reject(error);
+      },
+    );
+
+    instance.interceptors.response.use(
+      function (response) {
+        return response;
+      },
+      function (error) {
+        if (error.response) {
+          if (error.response.status === 401) {
+            if (store) {
+              store.dispatch(logOut());
+            }
+          }
+          throw error.response.data;
+        }
+
+        if (error.data) {
+          throw error.data;
+        }
+
+        throw error;
+      },
+    );
+  },
+};
 
 export interface SignIn {
   email: string,
