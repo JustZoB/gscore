@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { clearing } from "../store/authorization/reducers";
+import Link from "next/link";
 
 export async function getServerSideProps() {
   const response = await axios.get<Product[]>(`/products`)
@@ -42,11 +43,17 @@ export default function Home({ products }) {
           ))}
         </Cards>
       }
+      <TextContainer>
+        <Text>Have more than 10 sites?</Text>
+        <Link href="/contact-us" passHref>
+          <StyledLink>Contact us</StyledLink>
+        </Link>
+      </TextContainer>
     </>
   )
 }
 
-export const Cards = styled.div`
+const Cards = styled.div`
   display: flex;
   width: 100%;
 
@@ -69,4 +76,29 @@ export const Cards = styled.div`
       margin-right: 30px;
     }
   }
+`
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+`
+
+const Text = styled.p`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: ${colors.white};
+`
+
+const StyledLink = styled.a`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: ${colors.red};
+  text-decoration: underline;
 `
