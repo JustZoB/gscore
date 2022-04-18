@@ -35,7 +35,6 @@ export const Codes: React.FC<CodesProps> = ({ subscribes }) => {
 const CodesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 48px;
 
   & > *:not(:last-child) {
     margin-bottom: 32px;
