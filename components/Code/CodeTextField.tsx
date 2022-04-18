@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../../utils/colors";
 import Image from 'next/image';
@@ -13,21 +13,31 @@ interface TextFieldProps {
 }
 
 export const CodeTextField: React.FC<TextFieldProps> = (props) => {
+  const [showMessage, setShowMessage] = useState<boolean>(false);
   const copyValue = () => {
     navigator.clipboard.writeText(props.value)
+    setShowMessage(true)
+    setTimeout(function () {
+      setShowMessage(false);
+    }, 3000);
   }
 
   return (
     <TextFieldContainer>
       <TextField {...props} />
       {props.copy &&
-        <CopyButton onClick={copyValue}>
-          <Image
-            src={copy}
-            alt='Copy'
-            layout="fixed"
-          />
-        </CopyButton>
+        <CopyButtonContainer>
+          <CopyButton onClick={copyValue}>
+            <Image
+              src={copy}
+              alt='Copy'
+              layout="fixed"
+            />
+          </CopyButton>
+          <CopiedMessageContainer showMessage={showMessage}>
+            <CopiedMessage>Copied!</CopiedMessage>
+          </CopiedMessageContainer>
+        </CopyButtonContainer>
       }
     </TextFieldContainer>
   )
@@ -49,10 +59,39 @@ const TextField = styled.input<TextFieldProps>`
   border: 0;
 `
 
-const CopyButton = styled.div`
+const CopyButtonContainer = styled.div`
   position: absolute;
   right: 25px;
   top: 50%;
   transform: translateY(-50%);
+`
+
+const CopyButton = styled.div`
   cursor: pointer;
+`
+
+interface CopiedProps {
+  showMessage: boolean;
+}
+
+const CopiedMessageContainer = styled.div<CopiedProps>`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -40px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 70px;
+  height: 30px;
+  background-color: ${colors.gray};
+  border-radius: 4px;
+  opacity: ${(props) => (props.showMessage ? 1 : 0)};
+  transition: 0.5s;
+`
+
+const CopiedMessage = styled.p`
+  color: ${colors.white};
+  font-size: 18px;
+  font-size: 500;
 `
