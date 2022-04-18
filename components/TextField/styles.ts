@@ -21,7 +21,7 @@ export const Input = styled.input`
 export const TextFieldError = styled.span`
   position: absolute;
   right: 26px;
-  margin-top: 26px;
+  top: 26px;
   font-size: 16px;
   line-height: 18px;
   color: ${colors.lightRed};

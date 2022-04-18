@@ -8,7 +8,7 @@ import { H2 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignUp } from "../../store/authorization/actions";
 import { RootState } from "../../store/store";
-import { TextFieldError, ErrorMessage } from "../../components/TextField/styles";
+import { TextFieldError, ErrorMessage, FieldContainer } from "../../components/TextField/styles";
 import { AuthtorizationNavbar } from "../../components/AuthtorizationNavbar";
 import { useRouter } from "next/router";
 import { Container, Wrap } from "../../components/Containers";
@@ -45,43 +45,51 @@ export default function SignUp() {
             validate={signUpValidate}
             render={({ handleSubmit }) => (
               <>
-              <Field
-                  name={USERNAME_FIELD}
-                  render={({ input, meta }) => (
-                    <>
-                      <TextField
-                        {...input}
-                        placeholder='Username'
-                      />
-                      {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                    </>
-                  )}
-                />
-                <Field
-                  name={EMAIL_FIELD}
-                  render={({ input, meta }) => (
-                    <>
-                      <TextField
-                        {...input}
-                        placeholder='Email'
-                      />
-                      {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                    </>
-                  )}
-                />
-                <Field
-                  name={PASSWORD_FIELD}
-                  render={({ input, meta }) => (
-                    <>
-                      <TextField
-                        {...input}
-                        type='password'
-                        placeholder='Password'
-                      />
-                      {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                    </>
-                  )}
-                />
+                <FieldContainer>
+                  <Field
+                      name={USERNAME_FIELD}
+                      render={({ input, meta }) => (
+                        <>
+                          <TextField
+                            {...input}
+                            placeholder='Username'
+                          />
+                          {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                        </>
+                      )}
+                    />
+                </FieldContainer>
+
+                <FieldContainer>
+                  <Field
+                    name={EMAIL_FIELD}
+                    render={({ input, meta }) => (
+                      <>
+                        <TextField
+                          {...input}
+                          placeholder='Email'
+                        />
+                        {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                      </>
+                    )}
+                  />
+                </FieldContainer>
+
+                <FieldContainer>
+                  <Field
+                    name={PASSWORD_FIELD}
+                    render={({ input, meta }) => (
+                      <>
+                        <TextField
+                          {...input}
+                          type='password'
+                          placeholder='Password'
+                        />
+                        {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                      </>
+                    )}
+                  />
+                </FieldContainer>
 
                 {authorization.error &&
                   <>
