@@ -1,7 +1,14 @@
 import { Button } from "../../components/Button";
 import { CheckoutTotalContainer, CheckoutTotalText } from "./styles";
 import { H2 } from "../../components/Titles";
-import { TableBlockContainer, TableBlockContent, TableBlockContentItem, TableBlockContentText, TableBlockHeader, TableBlockHeaderText } from "../../components/TableBlock/styles";
+import {
+  TableBlockContainer,
+  TableBlockContent,
+  TableBlockContentItem,
+  TableBlockContentText,
+  TableBlockHeader,
+  TableBlockHeaderText
+} from "../../components/TableBlock/styles";
 import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBuy } from "../../store/payment/actions";
@@ -37,7 +44,7 @@ export default function Checkout() {
       <Wrap>
         <Container>
           <H2 textAlign="left" marginBottom={24}>Checkout</H2>
-          <TableBlockContainer>
+          <TableBlockContainer theme='dark'>
             <TableBlockHeader>
               <TableBlockHeaderText>Package name</TableBlockHeaderText>
               <TableBlockHeaderText>Price</TableBlockHeaderText>

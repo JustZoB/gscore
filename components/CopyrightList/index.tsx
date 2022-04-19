@@ -1,11 +1,10 @@
 import React from "react";
-import { CopyrightListContainer, CopyrightListItem, CopyrightText, GlobalFooterStyle } from "./styles";
+import { CopyrightListContainer, CopyrightListItem, CopyrightText, CopyrightLink } from "./styles";
 import Link from 'next/link'
 
 export const CopyrightList: React.FC = () => {
   return (
     <CopyrightListContainer>
-      <GlobalFooterStyle />
       <CopyrightListItem>
         <CopyrightText>Copyright © 2022 GScore</CopyrightText>
       </CopyrightListItem>
@@ -13,10 +12,14 @@ export const CopyrightList: React.FC = () => {
         <CopyrightText>All Rights Reserved</CopyrightText>
       </CopyrightListItem>
       <CopyrightListItem>
-        <Link href="/cookies">Cookies</Link>
+        <Link href="/cookies" passHref>
+          <CopyrightLink>Cookies</CopyrightLink>
+        </Link>
       </CopyrightListItem>
       <CopyrightListItem>
-        <Link href="/privacy">Privacy Policy</Link>
+        <Link href="/privacy" passHref>
+          <CopyrightLink>Privacy Policy</CopyrightLink>
+        </Link>
       </CopyrightListItem>
     </CopyrightListContainer>
   )

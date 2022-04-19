@@ -1,4 +1,5 @@
 import axios from 'axios';
+import CodeStatus from '../utils/codeStatus';
 
 const baseURL = 'https://gscore-back.herokuapp.com/api/';
 const instance = axios.create({ baseURL: baseURL });
@@ -54,6 +55,7 @@ export interface Product {
   sitesCount: number,
   name: string,
   prices: Price[],
+  upgrade?: boolean,
 }
 
 export interface Price {
@@ -68,11 +70,47 @@ export interface Checkout {
   callBack?: Function,
 }
 
-export interface Subscribe {
+export interface SubscribeProduct {
   id: number,
   userId: number,
   currentPeriodStart: number,
   currentPeriodEnd: number,
+}
+
+export interface Subscribe {
+  id: number,
+  userId: number,
+  productId: number,
+  currentPeriodStart: number,
+  currentPeriodEnd: number,
+  status: CodeStatus,
+  product: Product,
+  codes: Code[],
+}
+
+export interface Code {
+  id: number,
+  code: string,
+  origin: string | null,
+  status: CodeStatus,
+  subscribeId: number,
+  userId: number,
+}
+
+export interface ActivateCode {
+  code: string,
+  origin: string,
+}
+
+export interface UpgradSubscribe {
+  productId: number,
+  subscribeId: number,
+  callBack?: Function,
+}
+
+export interface ManageCodes {
+  codesIds: number[],
+  subscribeId: number,
 }
 
 export default instance

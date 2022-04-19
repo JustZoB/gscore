@@ -3,6 +3,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import { DashboardLayout } from "../components/DashboardLayout"
 import { persistor, store } from "../store/store"
 import { GlobalStyle } from "../styles/globals"
+import '../styles/fonts.css';
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,20 +1,20 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { Price, Subscribe } from '../../services/axios';
+import { Price, SubscribeProduct } from '../../services/axios';
 import { fetchBuy } from './actions';
 
-type UserState = {
+type PaymentState = {
   sitesCount: number | undefined
   price: Price | undefined
-  subscribe: Subscribe | undefined
+  subscribe: SubscribeProduct | undefined
   loading: 'idle' | 'loading' | 'failed'
   error: SerializedError | undefined
 }
 
-const paymentAdapter = createEntityAdapter<UserState>();
+const paymentAdapter = createEntityAdapter<PaymentState>();
 
 const paymentSlice = createSlice({
   name: 'paymentSlice',
-  initialState: paymentAdapter.getInitialState<UserState>({
+  initialState: paymentAdapter.getInitialState<PaymentState>({
     sitesCount: undefined,
     price: undefined,
     subscribe: undefined,

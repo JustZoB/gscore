@@ -22,8 +22,14 @@ const authorizationSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.user = undefined
+      state.loading = 'idle'
       state.error = undefined
+      state.complete = undefined
       setAccessToken('')
+    },
+    clearingAuthorization: (state) => {
+      state.error = undefined
+      state.complete = undefined
     },
   },
   extraReducers: ( builder ) => {
@@ -43,6 +49,7 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchSignUp.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
@@ -58,9 +65,11 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchUpdatePersonalData.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
+        state.complete = undefined
       })
       .addCase(fetchUpdatePersonalData.fulfilled, (state, action) => {
         state.loading = 'idle'
@@ -72,9 +81,11 @@ const authorizationSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
       .addCase(fetchUpdatePassword.pending, (state) => {
         state.loading = 'loading'
         state.error = undefined
+        state.complete = undefined
       })
       .addCase(fetchUpdatePassword.fulfilled, (state) => {
         state.loading = 'idle'
@@ -90,6 +101,7 @@ const authorizationSlice = createSlice({
 
 export const {
   logOut,
+  clearingAuthorization,
 } = authorizationSlice.actions;
 
 export default authorizationSlice.reducer;

@@ -3,6 +3,11 @@ export const validateEmail = (email: string) => {
   return re.test(email);
 }
 
+export const isDomain = (domain: string) => {
+  let re = /[-a-zA-Z0-9@:%_\+.~#?&\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&\/=]*)?/gi;
+  return re.test(domain);
+}
+
 export const isEmpty = (string: string) => {
   if (string) {
     if (string.trim() === '') {
@@ -17,6 +22,14 @@ export const isEmpty = (string: string) => {
 
 export const tooLong = (string: string, maxLenght:number = 20) => {
   if (string && string.length > maxLenght) {
+    return true
+  }
+
+  return false
+}
+
+export const tooSmall = (string: string, minLenght:number = 6) => {
+  if (string && string.length < minLenght) {
     return true
   }
 
@@ -58,11 +71,46 @@ export const passwordValidation = (password: string) => {
   if (tooLong(password)) {
     errors.password = 'Too long';
   }
+  if (tooSmall(password)) {
+    errors.password = 'Too small';
+  }
   if (isEmpty(password)) {
     errors.password = 'Required';
   }
 
   return errors.password
+}
+
+export const domainValidation = (domain: string) => {
+  const errors: { domain?: string } = {};
+
+  if (!isDomain(domain)) {
+    errors.domain = 'It is not domain';
+  }
+  if (isEmpty(domain)) {
+    errors.domain = 'Required';
+  }
+
+  return errors.domain
+}
+
+export const newPasswordValidation = (currentPassword: string, newPassword: string) => {
+  const errors: { newPassword?: string } = {};
+
+  if (currentPassword === newPassword) {
+    errors.newPassword = 'Passwords match';
+  }
+  if (tooLong(newPassword)) {
+    errors.newPassword = 'Too long';
+  }
+  if (tooSmall(newPassword)) {
+    errors.newPassword = 'Too small';
+  }
+  if (isEmpty(newPassword)) {
+    errors.newPassword = 'Required';
+  }
+
+  return errors.newPassword
 }
 
 export const signInValidate = (values: { email?: string, password?: string }) => {
@@ -111,7 +159,7 @@ export const changePersonalDataValidate = (values: { username?: string, email?: 
 export const updatePasswordValidate = (values: { currentPassword?: string, newPassword?: string }) => {
   const errors: { currentPassword?: string, newPassword?: string } = {}
   const currentPasswordValidate = passwordValidation(values.currentPassword);
-  const newPasswordValidate = passwordValidation(values.newPassword);
+  const newPasswordValidate = newPasswordValidation(values.currentPassword, values.newPassword);
   if (currentPasswordValidate) {
     errors.currentPassword = currentPasswordValidate;
   }
@@ -119,5 +167,15 @@ export const updatePasswordValidate = (values: { currentPassword?: string, newPa
     errors.newPassword = newPasswordValidate;
   }
   
+  return errors
+}
+
+export const domainValidate = (values: { domain?: string }) => {
+  const errors: { domain?: string } = {}
+  const domain = domainValidation(values.domain);
+  if (domain) {
+    errors.domain = domain;
+  }
+
   return errors
 }

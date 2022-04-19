@@ -13,9 +13,9 @@ export interface AuthorizationTextProps {
 export const AuthorizationText = styled.p<AuthorizationTextProps>`
   font-size: ${(props) => (props.fontSize != undefined ? props.fontSize : '14px')};
   line-height: 18px;
-  margin-bottom: 32px;
   color: ${colors.white};
 `
+
 export const AuthorizationLink = styled.a`
   font-size: 16px;
   line-height: 18px;

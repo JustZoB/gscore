@@ -29,5 +29,6 @@ export const FooterText = styled.p`
   font-size: 18px;
   line-height: 30px;
   margin-top: 24px;
+  font-family: Inter;
   color: ${colors.lightGray};
 `
