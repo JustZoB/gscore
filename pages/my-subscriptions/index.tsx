@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Button } from "../../components/Button";
 import { H1 } from "../../components/Titles";
 import { Subscribes } from "./Subscribes";
 import { Codes } from "./Codes";
@@ -9,14 +8,17 @@ import { useEffect } from "react";
 import { fetchGetSubscribes } from "../../store/subscribes/actions";
 import { RootState } from "../../store/store";
 import { Loader } from "../../components/Loader";
+import { setAccessToken } from "../../services/axios";
 
 export default function MySubscriptions() {
   const dispatch = useDispatch();
+  const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const subscribesSlice = useSelector((state: RootState) => state.subscribesSlice);
 
   useEffect(() => {
+    setAccessToken(authorization.user.token)
     dispatch(fetchGetSubscribes())
-  }, [dispatch])
+  }, [dispatch, authorization])
 
   return (
     <MySubscriptionsContainer>
