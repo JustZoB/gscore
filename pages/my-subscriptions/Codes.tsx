@@ -42,7 +42,7 @@ export const Codes: React.FC<CodesProps> = ({ subscribes }) => {
               ))
             }
           </CodesContainer>
-          {codes[0].status === CodeStatus.HOLD &&
+          {index + 1 === subscribesSlice.paginationActiveElement && codes[0].status === CodeStatus.HOLD &&
             <>
               <KeepFormContainer>
                 <KeepFormText>Select the domains you want to keep</KeepFormText>
