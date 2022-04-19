@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { logOut} from "../../store/authorization/reducers";
+import { clearAfterLogOut } from "../../store/subscribes/reducers";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const Header: React.FC = () => {
 
   const handleLogOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
     dispatch(logOut())
+    dispatch(clearAfterLogOut())
   }
 
   return (

@@ -22,7 +22,9 @@ const authorizationSlice = createSlice({
   reducers: {
     logOut: (state) => {
       state.user = undefined
+      state.loading = 'idle'
       state.error = undefined
+      state.complete = undefined
       setAccessToken('')
     },
     clearing: (state) => {
