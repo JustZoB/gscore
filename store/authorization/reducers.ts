@@ -27,7 +27,7 @@ const authorizationSlice = createSlice({
       state.complete = undefined
       setAccessToken('')
     },
-    clearing: (state) => {
+    clearingAuthorization: (state) => {
       state.error = undefined
       state.complete = undefined
     },
@@ -101,7 +101,7 @@ const authorizationSlice = createSlice({
 
 export const {
   logOut,
-  clearing,
+  clearingAuthorization,
 } = authorizationSlice.actions;
 
 export default authorizationSlice.reducer;

@@ -6,8 +6,9 @@ import axios, { Product } from "../services/axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { clearing } from "../store/authorization/reducers";
+import { clearingAuthorization } from "../store/authorization/reducers";
 import Link from "next/link";
+import { clearingSubscribes } from "../store/subscribes/reducers";
 
 export async function getServerSideProps() {
   const response = await axios.get<Product[]>(`/products`)
@@ -21,7 +22,8 @@ export default function Home({ products }) {
 
   useEffect(() => {
     const handleStart = () => {
-      dispatch(clearing())
+      dispatch(clearingAuthorization())
+      dispatch(clearingSubscribes())
     }
 
     router.events.on('routeChangeComplete', handleStart)

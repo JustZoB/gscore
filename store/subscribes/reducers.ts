@@ -57,6 +57,13 @@ const subscribesSlice = createSlice({
         state.keepHoldingSubscribeId = undefined
       }
     },
+    clearingSubscribes: (state) => {
+      state.keepHoldingCodesIds = []
+      state.keepHoldingSubscribeId = undefined
+      state.paginationActiveElement = 1
+      state.loading = 'idle'
+      state.error = undefined
+    },
     clearAfterLogOut: (state) => {
       state.subscribes = undefined
       state.keepHoldingCodesIds = []
@@ -155,6 +162,7 @@ export const {
   paginationPrev,
   addIdToKeeping,
   removeIdFromKeeping,
+  clearingSubscribes,
   clearAfterLogOut,
 
 } = subscribesSlice.actions;
