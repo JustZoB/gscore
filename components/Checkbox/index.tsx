@@ -6,6 +6,7 @@ import check from '../../public/check.svg';
 
 interface CheckboxProps {
   checked: boolean;
+  disabled?: boolean;
   onChange: (event?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,13 +14,18 @@ export const Checkbox: React.FC<CheckboxProps> = (props) => {
   return (
     <CheckboxContainer>
       <CheckboxInput type='checkbox' {...props} />
-      <CustomCheckbox checked={props.checked} />
-      {props.checked &&
-        <Image
-          src={check}
-          alt='Check'
-          layout="fixed"
-        />
+      {props.disabled
+      ? <DisabledCustomCheckbox />
+      : <>
+          <CustomCheckbox checked={props.checked} />
+          {props.checked &&
+            <Image
+              src={check}
+              alt='Check'
+              layout="fixed"
+            />
+          }
+      </>
       }
     </CheckboxContainer>
   )
@@ -42,6 +48,19 @@ const CheckboxInput = styled.input`
 interface CustomCheckboxProps {
   checked: boolean;
 }
+
+const DisabledCustomCheckbox = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  border: 1px solid ${colors.lightGray};
+  background-color: ${colors.lightGray};
+  transform: translate(-50%, -50%);
+  border-radius: 7px;
+  cursor: not-allowed;
+`
 
 const CustomCheckbox = styled.span<CustomCheckboxProps>`
   position: absolute;
