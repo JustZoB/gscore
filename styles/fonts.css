@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'THICCCBOI';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Thicccboi/THICCCBOI-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/Thicccboi/THICCCBOI-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'THICCCBOI';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/Thicccboi/THICCCBOI-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/Inter/Inter-Medium.ttf') format('truetype');
+}
