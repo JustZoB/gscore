@@ -104,6 +104,7 @@ export interface Product {
   sitesCount: number,
   name: string,
   prices: Price[],
+  upgrade?: boolean,
 }
 
 export interface Price {
@@ -148,6 +149,17 @@ export interface Code {
 export interface ActivateCode {
   code: string,
   origin: string,
+}
+
+export interface UpgradSubscribe {
+  productId: number,
+  subscribeId: number,
+  callBack?: Function,
+}
+
+export interface ManageCodes {
+  codesIds: number[],
+  subscribeId: number,
 }
 
 export default instance

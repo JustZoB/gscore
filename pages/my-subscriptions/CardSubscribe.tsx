@@ -1,4 +1,7 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Button } from "../../components/Button";
 import { StatusText } from "../../components/Code/CodeStatusText";
 import {
@@ -12,6 +15,7 @@ import {
   TableBlockContentItemContainer,
 } from "../../components/TableBlock/styles";
 import { Product } from "../../services/axios";
+import { setActiveIdSubscribe } from "../../store/subscribes/reducers";
 import CodeStatus from "../../utils/codeStatus";
 
 export interface CardSubscribeProps {
@@ -24,6 +28,14 @@ export interface CardSubscribeProps {
 }
 
 export const CardSubscribe: React.FC<CardSubscribeProps> = ({ id, currentPeriodStart, currentPeriodEnd, status, product, active }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const onSetActiveUpgrade = () => {
+    dispatch(setActiveIdSubscribe(id))
+    router.push('/upgrade-subscribe')
+  }
+
   return (
     <TableBlockContainer active={active}>
       <TableBlockHeader>
@@ -46,8 +58,9 @@ export const CardSubscribe: React.FC<CardSubscribeProps> = ({ id, currentPeriodS
         </TableBlockContentItem>
         <TableBlockContentItem>
           <Button
-            label="View"
-            theme="secondary"
+            label="Upgrade"
+            theme="primary"
+            onClick={onSetActiveUpgrade}
           />
         </TableBlockContentItem>
       </TableBlockContent>

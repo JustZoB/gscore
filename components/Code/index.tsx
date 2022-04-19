@@ -12,15 +12,17 @@ import { RootState } from "../../store/store";
 import { ErrorMessage, TextFieldError } from "../TextField/styles";
 import { domainValidate } from "../../utils/validation";
 import { Loader } from "../Loader";
+import { addIdToKeeping, removeIdFromKeeping } from "../../store/subscribes/reducers";
 
 export interface CodeProps {
   id: number,
+  subscribeId: number,
   status: CodeStatus,
   code: string,
   origin: string | null,
 }
 
-export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
+export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeId }) => {
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   const subscribesSlice = useSelector((state: RootState) => state.subscribesSlice);
@@ -28,7 +30,8 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
   const DOMAIN_FIELD = 'domain';
 
   const changeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(!isChecked)
+    setIsChecked(!isChecked);
+    isChecked ? dispatch(removeIdFromKeeping({ id })) : dispatch(addIdToKeeping({ id, subscribeId }));
   }
 
   const onActivateCode = (values: { domain: string }) => {
@@ -43,7 +46,7 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin }) => {
       <CodeItem>
         <CodeItemHeader />
         <CodeItemContent>
-          <Checkbox checked={isChecked} onChange={changeCheckbox} />
+          <Checkbox checked={isChecked} onChange={changeCheckbox} disabled={status !== CodeStatus.HOLD} />
         </CodeItemContent>
       </CodeItem>
       <CodeItem>

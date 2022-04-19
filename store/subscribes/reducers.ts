@@ -1,9 +1,12 @@
 import { createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { Subscribe } from '../../services/axios';
-import { fetchActiveCode, fetchGetSubscribes } from './actions';
+import { Code, Subscribe } from '../../services/axios';
+import { fetchActiveCode, fetchGetSubscribes, fetchManageHoldingCodes, fetchUpgradeSubscribe } from './actions';
 
 type SubscribesState = {
   subscribes: Subscribe[] | undefined
+  keepHoldingCodesIds: number[]
+  keepHoldingSubscribeId: number | undefined
+  activeIdSubscribe: number
   paginationActiveElement: number
   paginationLength: number
   loading: 'idle' | 'loading' | 'failed'
@@ -16,6 +19,9 @@ const subscribesSlice = createSlice({
   name: 'subscribesSlice',
   initialState: subscribesAdapter.getInitialState<SubscribesState>({
     subscribes: undefined,
+    keepHoldingCodesIds: [],
+    keepHoldingSubscribeId: undefined,
+    activeIdSubscribe: 0,
     paginationActiveElement: 1,
     paginationLength: 1,
     loading: 'idle',
@@ -25,11 +31,30 @@ const subscribesSlice = createSlice({
     paginationNext: (state) => {
       if (state.paginationActiveElement !== state.paginationLength) {
         state.paginationActiveElement++
+        state.keepHoldingCodesIds = []
+        state.keepHoldingSubscribeId = undefined
       }
     },
     paginationPrev: (state) => {
       if (state.paginationActiveElement !== 1) {
         state.paginationActiveElement--
+        state.keepHoldingCodesIds = []
+        state.keepHoldingSubscribeId = undefined
+      }
+    },
+    setActiveIdSubscribe: (state, action) => {
+      state.activeIdSubscribe = action.payload
+    },
+    addIdToKeeping: (state, action) => {
+      state.keepHoldingCodesIds.push(action.payload.id)
+      state.keepHoldingSubscribeId = action.payload.subscribeId
+    },
+    removeIdFromKeeping: (state, action) => {
+      state.keepHoldingCodesIds = state.keepHoldingCodesIds.filter(id => {
+        if (id !== action.payload.id) return id
+      })
+      if (state.keepHoldingCodesIds.length === 0) {
+        state.keepHoldingSubscribeId = undefined
       }
     },
   },
@@ -75,12 +100,52 @@ const subscribesSlice = createSlice({
         state.loading = 'failed'
         state.error = action.error
       })
+
+      .addCase(fetchUpgradeSubscribe.pending, (state) => {
+        state.loading = 'loading'
+        state.error = undefined
+      })
+      .addCase(fetchUpgradeSubscribe.fulfilled, (state, action) => {
+        state.loading = 'idle'
+        state.error = undefined
+        action.payload.callBack()
+      })
+      .addCase(fetchUpgradeSubscribe.rejected, (state, action) => {
+        state.loading = 'failed'
+        state.error = action.error
+      })
+
+      .addCase(fetchManageHoldingCodes.pending, (state) => {
+        state.loading = 'loading'
+        state.error = undefined
+      })
+      .addCase(fetchManageHoldingCodes.fulfilled, (state, action) => {
+        state.loading = 'idle'
+        state.error = undefined
+        state.subscribes = state.subscribes.map(subscribe => {
+          if (subscribe.id === state.keepHoldingSubscribeId) {
+            subscribe.codes = action.payload.codes
+          }
+
+          return subscribe
+        })
+        state.keepHoldingCodesIds = []
+        state.keepHoldingSubscribeId = undefined
+      })
+      .addCase(fetchManageHoldingCodes.rejected, (state, action) => {
+        state.loading = 'failed'
+        state.error = action.error
+      })
   },
 });
 
 export const {
+  setActiveIdSubscribe,
   paginationNext,
   paginationPrev,
+  addIdToKeeping,
+  removeIdFromKeeping,
+
 } = subscribesSlice.actions;
 
 export default subscribesSlice.reducer;

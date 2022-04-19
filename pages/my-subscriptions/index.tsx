@@ -22,12 +22,6 @@ export default function MySubscriptions() {
     <MySubscriptionsContainer>
       <MySubscriptionsHeader>
         <H1 textAlign="left" marginBottom={0}>My subscriptions</H1>
-        {subscribesSlice.subscribes && subscribesSlice.loading !== 'loading' &&
-          <Button
-            label="Upgrade"
-            theme="primary"
-          />
-        }
       </MySubscriptionsHeader>
       {subscribesSlice.loading === 'loading' && !subscribesSlice.subscribes
         ? <Loader />

@@ -53,7 +53,7 @@ export default function Home({ products }) {
   )
 }
 
-const Cards = styled.div`
+export const Cards = styled.div`
   display: flex;
   width: 100%;
 
