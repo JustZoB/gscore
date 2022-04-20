@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { logOut} from "../../store/authorization/reducers";
+import { logOut } from "../../store/authorization/reducers";
 import { clearAfterLogOut } from "../../store/subscribes/reducers";
 
 export const Header: React.FC = () => {
@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
                   />
                   {dropDownActive &&
                     <DropDownMenu>
-                      <Link href="/settings" passHref>
+                      <Link href="/settings/update-data-form" passHref>
                         <a>
                           <LinkContainer>
                             <Image

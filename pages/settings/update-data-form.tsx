@@ -41,6 +41,8 @@ export default function UpdateDataForm() {
                     <>
                       <TextField
                         {...input}
+                        errors={meta.error}
+                        type='username'
                         placeholder='Username'
                       />
                       {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -55,6 +57,8 @@ export default function UpdateDataForm() {
                     <>
                       <TextField
                         {...input}
+                        errors={meta.error}
+                        type='email'
                         placeholder='Email'
                       />
                       {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}

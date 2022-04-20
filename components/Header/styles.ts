@@ -6,11 +6,28 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 32px 86px;
+
+  @media screen and (max-width: 1199.92px) {
+    padding: 32px 60px;
+  }
+  @media screen and (max-width: 991.92px) {
+    padding: 32px 40px;
+  }
+  @media screen and (max-width: 767.92px) {
+    padding: 24px 32px;
+  }
+  @media screen and (max-width: 575.92px) {
+    padding: 16px;
+  }
 `
 
 export const LinksContainer = styled.div`
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 767.92px) {
+    display: none;
+  }
 
   & > *:not(:last-child) {
     margin-right: 32px;

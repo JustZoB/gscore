@@ -43,13 +43,13 @@ export const CodeTextField: React.FC<TextFieldProps> = (props) => {
   )
 }
 
-const TextFieldContainer  = styled.div`
+const TextFieldContainer = styled.div`
   position: relative;
   width: 100%;
 `
 
 const TextField = styled.input<TextFieldProps>`
-  width: ${(props) => (props.copy ? 'calc(100% - 85px)' : 'calc(100% - 50px)')};
+  width: ${(props) => (props.copy ? 'calc(100% - 75px)' : 'calc(100% - 50px)')};
   font-size: 16px;
   line-height: 18px;
   padding: ${(props) => (props.copy ? '25px 50px 25px 25px' : '25px')};
@@ -61,7 +61,7 @@ const TextField = styled.input<TextFieldProps>`
 
 const CopyButtonContainer = styled.div`
   position: absolute;
-  right: 25px;
+  right: 15px;
   top: 50%;
   transform: translateY(-50%);
 `

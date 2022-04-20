@@ -41,6 +41,7 @@ export default function UpdatePassword() {
                     <>
                       <TextField
                         {...input}
+                        errors={meta.error}
                         type='password'
                         placeholder='Current Password'
                       />
@@ -56,6 +57,7 @@ export default function UpdatePassword() {
                     <>
                       <TextField
                         {...input}
+                        errors={meta.error}
                         type='password'
                         placeholder='New Password'
                       />

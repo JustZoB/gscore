@@ -52,4 +52,11 @@ export const MySubscriptionsHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 48px;
+
+  @media screen and (max-width: 991.92px) {
+    margin-bottom: 40px;
+  }
+  @media screen and (max-width: 767.92px) {
+    margin-bottom: 32px;
+  }
 `

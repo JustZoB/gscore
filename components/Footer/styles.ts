@@ -8,6 +8,19 @@ export const FooterContainer = styled.footer`
   color: ${colors.lightGray};
   padding: 60px 86px 0;
   margin-top: 40px;
+
+  @media screen and (max-width: 1199.92px) {
+    padding: 60px 60px 0;
+  }
+  @media screen and (max-width: 991.92px) {
+    padding: 50px 40px 0;
+  }
+  @media screen and (max-width: 767.92px) {
+    padding: 50px 32px 0;
+  }
+  @media screen and (max-width: 575.92px) {
+    padding: 40px 16px 0;
+  }
 `
 
 export const CopyrightContainer = styled.div`
@@ -17,6 +30,16 @@ export const CopyrightContainer = styled.div`
   border-top: 1px solid ${colors.darkGray};
   margin-top: 60px;
   padding: 40px 0;
+
+  @media screen and (max-width: 767.92px) {
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 32px 0;
+
+    & > *:not(:last-child) {
+      margin-bottom: 32px;
+    }
+  }
 `
 
 export const FooterContent = styled.div`

@@ -31,7 +31,6 @@ export const CardBuyItem: React.FC<CardBuyItemProps> = ({ children, isEven }) =>
       <Image
         src={isEven ? checkBlack : checkRed}
         alt='check'
-        layout="fixed"
       />
       <CardBuyText>
         {children}
@@ -44,6 +43,10 @@ export const CardBuyListContainer = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 35px;
+
+  @media screen and (max-width: 767.92px) {
+    margin-bottom: 25px;
+  }
 `
 
 export const StyledCardBuyItem = styled.li`
@@ -60,4 +63,10 @@ export const CardBuyText = styled.p`
   font-size: 18px;
   line-height: 20px;
   color: ${colors.white};
+
+  @media screen and (max-width: 767.92px) {
+    margin-left: 10px;
+    font-size: 16px;
+    line-height: 18px;
+  }
 `

@@ -43,36 +43,36 @@ export const CardBuy: React.FC<Product> = ({ id, sitesCount, name, prices, upgra
       </CardBuyText>
       <CardBuyList isEven={id % 2 === 1} sitesCount={sitesCount} />
       {upgrade
-      ? <Button
+        ? <Button
           label="Upgrade Gscore"
           theme="secondary"
           size="big"
           onClick={onUpgrade}
         />
-      : <>
-        {authorization.user
-        ? <Link href="/authorization/checkout" passHref>
-            <a>
-              <Button
-                label="Get Gscore"
-                theme="secondary"
-                size="big"
-                onClick={onChoose}
-              />
-            </a>
-          </Link>
-        : <Link href="/authorization/sign-up" passHref>
-            <a>
-              <Button
-                label="Get Gscore"
-                theme="secondary"
-                size="big"
-                onClick={onChoose}
-              />
-            </a>
-          </Link>
-        }
-      </>
+        : <>
+          {authorization.user
+            ? <Link href="/authorization/checkout" passHref>
+              <a>
+                <Button
+                  label="Get Gscore"
+                  theme="secondary"
+                  size="big"
+                  onClick={onChoose}
+                />
+              </a>
+            </Link>
+            : <Link href="/authorization/sign-up" passHref>
+              <a>
+                <Button
+                  label="Get Gscore"
+                  theme="secondary"
+                  size="big"
+                  onClick={onChoose}
+                />
+              </a>
+            </Link>
+          }
+        </>
       }
     </CardBuyContainer>
   )
@@ -88,6 +88,13 @@ export const CardBuyContainer = styled.div`
   padding: 42px 48px;
   border: 0;
   border-radius: 12px;
+
+  @media screen and (max-width: 1199.92px) {
+    padding: 30px 34px;
+  }
+  @media screen and (max-width: 767.92px) {
+    padding: 20px 28px;
+  }
 `
 
 export const CardBuyText = styled.p`
@@ -98,4 +105,11 @@ export const CardBuyText = styled.p`
   padding-bottom: 40px;
   border-bottom: 1px solid ${colors.white};
   margin-bottom: 40px;
+
+  @media screen and (max-width: 767.92px) {
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
 `

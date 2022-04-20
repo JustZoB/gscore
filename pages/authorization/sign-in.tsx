@@ -49,6 +49,7 @@ export default function SignIn() {
                         <TextField
                           {...input}
                           errors={meta.error}
+                          type="email"
                           placeholder='Email'
                         />
                         {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}

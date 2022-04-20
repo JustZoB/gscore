@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusText } from "./CodeStatusText";
-import { CodeContainer, CodeErrorMessageContainer, CodeItem, CodeItemContent, CodeItemHeader, DomainFieldContainer } from "./styles";
+import { ButtonContainer, CodeContainer, CodeErrorMessageContainer, CodeItem, CodeItemContent, CodeItemHeader, DomainFieldContainer } from "./styles";
 import { CodeTextField } from "./CodeTextField";
 import { Checkbox } from "../Checkbox";
 import CodeStatus from "../../utils/codeStatus";
@@ -44,7 +44,7 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeI
   return (
     <CodeContainer>
       <CodeItem>
-        <CodeItemHeader />
+        <CodeItemHeader hideOnMobile={true} />
         <CodeItemContent>
           <Checkbox checked={isChecked} onChange={changeCheckbox} disabled={status !== CodeStatus.HOLD} />
         </CodeItemContent>
@@ -59,8 +59,8 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeI
         <CodeItemHeader>Domain</CodeItemHeader>
         <CodeItemContent>
           {status === CodeStatus.ACTIVE
-          ? <CodeTextField placeholder="" value={domain} readOnly={true} />
-          : <Form
+            ? <CodeTextField placeholder="" value={domain} readOnly={true} />
+            : <Form
               onSubmit={onActivateCode}
               validate={domainValidate}
               render={({ handleSubmit }) => (
@@ -84,12 +84,14 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeI
                   </DomainFieldContainer>
 
                   {subscribesSlice.loading === 'loading'
-                  ? <Loader />
-                  : <Button
-                      label="Activate"
-                      theme="secondary"
-                      onClick={handleSubmit}
-                    />
+                    ? <Loader />
+                    : <ButtonContainer>
+                      <Button
+                        label="Activate"
+                        theme="secondary"
+                        onClick={handleSubmit}
+                      />
+                    </ButtonContainer>
                   }
                   {/* <Button
                     label="Activate"
@@ -99,7 +101,7 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeI
                 </>
               )}
             />
-        }
+          }
         </CodeItemContent>
       </CodeItem>
       {/* {status === CodeStatus.INACTIVE &&
@@ -113,8 +115,8 @@ export const Code: React.FC<CodeProps> = ({ id, status, code, origin, subscribeI
           </CodeItemContent>
         </CodeItem>
       } */}
-      <CodeItem>
-        <CodeItemHeader>Status</CodeItemHeader>
+      <CodeItem status={true}>
+        <CodeItemHeader hideOnMobile={true}>Status</CodeItemHeader>
         <CodeItemContent>
           <StatusText status={status} />
         </CodeItemContent>

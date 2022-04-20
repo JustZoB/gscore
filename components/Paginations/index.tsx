@@ -55,6 +55,10 @@ const PaginationsContainer = styled.div`
   align-self: flex-start;
   margin-bottom: 32px;
 
+  @media screen and (max-width: 767.92px) {
+    align-self: center;
+  }
+
   & > *:not(:last-child) {
     margin-right: 12px;
   }
