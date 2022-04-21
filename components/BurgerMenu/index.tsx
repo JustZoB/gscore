@@ -5,14 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../public/logo.png';
 import arrow from '../../public/arrow.svg';
-import settings from '../../public/settings.svg';
-import logout from '../../public/logout.svg';
 import { CloseIcon } from "./CloseIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { logOut } from "../../store/authorization/reducers";
 import { clearAfterLogOut } from "../../store/subscribes/reducers";
 import { closeBurgerMenu } from "../../store/burgerMenu/reducers";
+import SettingsSVG from "../../public/svg/SettingsSVG";
+import LogOutSCG from "../../public/svg/LogOutSCG";
 
 export const BurgerMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -68,22 +68,14 @@ export const BurgerMenu: React.FC = () => {
               <Link href="/settings/update-data-form" passHref>
                 <a>
                   <BurgerMenuDropDownMenuItem>
-                    <Image
-                      src={settings}
-                      alt='Settings'
-                      layout="fixed"
-                    />
+                    <SettingsSVG color={colors.gray} />
                     <BurgerMenuDropDownMenuText>Settings</BurgerMenuDropDownMenuText>
                   </BurgerMenuDropDownMenuItem>
                 </a>
               </Link>
 
               <BurgerMenuDropDownMenuItem onClick={handleLogOut}>
-                <Image
-                  src={logout}
-                  alt='Logout'
-                  layout="fixed"
-                />
+                <LogOutSCG color={colors.gray} />
                 <BurgerMenuDropDownMenuText>Logout</BurgerMenuDropDownMenuText>
               </BurgerMenuDropDownMenuItem>
             </BurgerMenuDropDownMenuContainer>

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import logo from '../../public/logo.png';
 import arrow from '../../public/arrow.svg';
-import settings from '../../public/settings.svg';
-import logout from '../../public/logout.svg';
 import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText, LogoWrapper } from "./styles";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +10,9 @@ import { logOut } from "../../store/authorization/reducers";
 import { clearAfterLogOut } from "../../store/subscribes/reducers";
 import { BurgerIcon } from "../BurgerMenu/BurgerIcon";
 import { openBurgerMenu } from "../../store/burgerMenu/reducers";
+import SettingsSVG from "../../public/svg/SettingsSVG";
+import colors from "../../utils/colors";
+import LogOutSCG from "../../public/svg/LogOutSCG";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -58,22 +59,14 @@ export const Header: React.FC = () => {
                       <Link href="/settings/update-data-form" passHref>
                         <a>
                           <LinkContainer>
-                            <Image
-                              src={settings}
-                              alt='Settings'
-                              layout="fixed"
-                            />
+                            <SettingsSVG color={colors.white} />
                             <LinkText>Settings</LinkText>
                           </LinkContainer>
                         </a>
                       </Link>
 
                       <LinkContainer onClick={handleLogOut}>
-                        <Image
-                          src={logout}
-                          alt='Logout'
-                          layout="fixed"
-                        />
+                        <LogOutSCG color={colors.white} />
                         <LinkText>Logout</LinkText>
                       </LinkContainer>
                     </DropDownMenu>
