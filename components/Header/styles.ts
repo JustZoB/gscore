@@ -5,6 +5,7 @@ export const HeaderContainer = styled.header`
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 32px 86px;
 
   @media screen and (max-width: 1199.92px) {

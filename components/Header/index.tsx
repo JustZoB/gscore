@@ -5,20 +5,18 @@ import settings from '../../public/settings.svg';
 import logout from '../../public/logout.svg';
 import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText } from "./styles";
 import Image from 'next/image';
-import Link from 'next/link'
+import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { logOut } from "../../store/authorization/reducers";
 import { clearAfterLogOut } from "../../store/subscribes/reducers";
+import { BurgerIcon } from "../BurgerMenu/BurgerIcon";
+import { openBurgerMenu } from "../../store/burgerMenu/reducers";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const [dropDownActive, setDropDownActive] = useState<boolean>(false);
-
-  const toggleDropDown = () => {
-    setDropDownActive(!dropDownActive)
-  }
 
   const handleLogOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
     dispatch(logOut())
@@ -47,7 +45,7 @@ export const Header: React.FC = () => {
                   </Link>
                 </LinkContainer>
 
-                <DropDownButton onClick={toggleDropDown}>
+                <DropDownButton onClick={() => setDropDownActive(!dropDownActive)}>
                   <LinkText>{authorization.user.user.username}</LinkText>
                   <Image
                     src={arrow}
@@ -81,6 +79,7 @@ export const Header: React.FC = () => {
                   }
                 </DropDownButton>
               </LinksContainer>
+              <BurgerIcon onClick={() => dispatch(openBurgerMenu())} />
             </>
           }
         </>
