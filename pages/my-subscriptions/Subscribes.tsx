@@ -26,15 +26,16 @@ export const Subscribes: React.FC<SubscribesProps> = ({ subscribes }) => {
             status,
             product,
           }, index) => (
-            <CardSubscribe
-              key={id}
-              id={id}
-              currentPeriodStart={currentPeriodStart}
-              currentPeriodEnd={currentPeriodEnd}
-              status={status}
-              product={product}
-              active={subscribesSlice.paginationActiveElement === index + 1}
-            />
+            <CardSubscribeWrap key={id}>
+              <CardSubscribe
+                id={id}
+                currentPeriodStart={currentPeriodStart}
+                currentPeriodEnd={currentPeriodEnd}
+                status={status}
+                product={product}
+                active={subscribesSlice.paginationActiveElement === index + 1}
+              />
+            </CardSubscribeWrap>
           ))}
         </SubscribesItems>
       </SubscribesWrap>
@@ -44,7 +45,17 @@ export const Subscribes: React.FC<SubscribesProps> = ({ subscribes }) => {
 }
 
 const SubscribesWrap = styled.div`
-  width: 100%;
+  width: calc(100% + 28px);
+  margin: 0 -14px;
+
+  @media screen and (max-width: 1199.92px) {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+  }
+  @media screen and (max-width: 767.92px) {
+    width: calc(100% + 12px);
+    margin: 0 -6px;
+  }
 `
 
 interface SubscribesItemsProps {
@@ -54,19 +65,31 @@ interface SubscribesItemsProps {
 
 const SubscribesItems = styled.div<SubscribesItemsProps>`
   display: flex;
-  width: ${(props) => (`${props.length * 50}%`)};
+  width: ${(props) => (`${props.length * 100 / 3}%`)};
   transform: ${(props) => (`translateX(-${100 / props.length * (props.activeElement - 1)}%)`)};
   transition: 0.5s;
 
+  @media screen and (max-width: 1199.92px) {
+    width: ${(props) => (`${props.length * 100 / 2}%`)};
+  }
   @media screen and (max-width: 767.92px) {
     width: ${(props) => (`${props.length * 100}%`)};
   }
 
   & > * {
-    width: ${(props) => (`calc(${100 / props.length}% - ${(props.length - 1) * 28 / props.length}px)`)};
+    width: ${(props) => (`${100 / props.length}%`)};
+  }
+`
 
-    &:not(:last-child) {
-      margin-right: 28px;
+const CardSubscribeWrap = styled.div`
+  & > * {
+    margin: 0 14px 20px;
+
+    @media screen and (max-width: 1199.92px) {
+      margin: 0 10px 20px;
+    }
+    @media screen and (max-width: 767.92px) {
+      margin: 0 6px 20px;
     }
   }
 `
