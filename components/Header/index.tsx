@@ -3,7 +3,7 @@ import logo from '../../public/logo.png';
 import arrow from '../../public/arrow.svg';
 import settings from '../../public/settings.svg';
 import logout from '../../public/logout.svg';
-import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText } from "./styles";
+import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText, LogoWrapper } from "./styles";
 import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
@@ -27,11 +27,12 @@ export const Header: React.FC = () => {
     <HeaderContainer>
       <Link href="/" passHref>
         <a>
-          <Image
-            src={logo}
-            alt='Logo'
-            layout="fixed"
-          />
+          <LogoWrapper>
+            <Image
+              src={logo}
+              alt='Logo'
+            />
+          </LogoWrapper>
         </a>
       </Link>
       {authorization.user &&

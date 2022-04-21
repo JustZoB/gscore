@@ -22,6 +22,20 @@ export const HeaderContainer = styled.header`
   }
 `
 
+export const LogoWrapper = styled.div`
+  width: 171px;
+  height: 42px;
+
+  @media screen and (max-width: 991.92px) {
+    width: 150px;
+    height: 37px;
+  }
+  @media screen and (max-width: 767.92px) {
+    width: 130px;
+    height: 32px;
+  }
+`
+
 export const LinksContainer = styled.div`
   display: flex;
   align-items: center;
