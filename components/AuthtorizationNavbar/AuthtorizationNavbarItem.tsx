@@ -6,7 +6,7 @@ export interface ItemProps {
   active: boolean;
 }
 
-export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active}) => {
+export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active }) => {
   return (
     <ItemContainer active={active}>
       <ItemText>{children}</ItemText>
@@ -18,11 +18,10 @@ export const AuthtorizationNavbarItem: React.FC<ItemProps> = ({ children, active
 export const ItemContainer = styled.div<ItemProps>`
   display: flex;
   flex-direction: column;
-  width: calc(33.33% - 10px);
   cursor: ${(props) => (!props.active && props.onClick ? 'pointer' : 'defualt')};
 
-  &:not(:last-child) {
-    margin-right: 15px;
+  @media screen and (max-width: 575.92px) {
+    width: 100%;
   }
 `
 
@@ -32,6 +31,11 @@ export const ItemText = styled.p`
   font-weight: 600;
   margin-bottom: 20px;
   color: ${colors.white};
+
+  @media screen and (max-width: 575.92px) {
+    text-align: center;
+    margin-bottom: 10px;
+  }
 `
 
 export const ItemLine = styled.span<ItemProps>`

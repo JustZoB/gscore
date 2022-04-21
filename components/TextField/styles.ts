@@ -4,19 +4,27 @@ import colors from "../../utils/colors";
 
 export const FieldContainer = styled.div`
   position: relative;
+  margin-bottom: 24px;
+
+  @media screen and (max-width: 767.92px) {
+    margin-bottom: 16px;
+  }
 `
 
 export const Input = styled.input<TextFieldProps>`
-  position: relative;
   width: calc(100% - 52px);
   font-size: 16px;
   line-height: 18px;
-  margin-bottom: 24px;
   padding: 25px;
   color: ${colors.darkGray};
   background-color: ${colors.white};
   border: 1px solid ${(props) => (props.errors !== undefined ? colors.lightRed : colors.green)};
   border-radius: 6px;
+
+  @media screen and (max-width: 767.92px) {
+    width: calc(100% - 42px);
+    padding: 15px 20px;
+  }
 
   &:disabled {
     background-color: ${colors.lightGray};

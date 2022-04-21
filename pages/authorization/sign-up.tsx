@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { TextField } from "../../components/TextField";
 import { Field, Form } from 'react-final-form';
 import { signUpValidate } from "../../utils/validation";
-import { AuthorizationLink, AuthorizationText, HaveAnAccountContainer} from "./styles";
+import { AuthorizationLink, AuthorizationText, HaveAnAccountContainer } from "./styles";
 import { H2 } from "../../components/Titles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignUp } from "../../store/authorization/actions";
@@ -47,18 +47,19 @@ export default function SignUp() {
               <>
                 <FieldContainer>
                   <Field
-                      name={USERNAME_FIELD}
-                      render={({ input, meta }) => (
-                        <>
-                          <TextField
-                            {...input}
-                            errors={meta.error}
-                            placeholder='Username'
-                          />
-                          {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
-                        </>
-                      )}
-                    />
+                    name={USERNAME_FIELD}
+                    render={({ input, meta }) => (
+                      <>
+                        <TextField
+                          {...input}
+                          errors={meta.error}
+                          type="username"
+                          placeholder='Username'
+                        />
+                        {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
+                      </>
+                    )}
+                  />
                 </FieldContainer>
 
                 <FieldContainer>
@@ -69,6 +70,7 @@ export default function SignUp() {
                         <TextField
                           {...input}
                           errors={meta.error}
+                          type="email"
                           placeholder='Email'
                         />
                         {meta.touched && meta.error && <TextFieldError>{meta.error}</TextFieldError>}
@@ -118,7 +120,7 @@ export default function SignUp() {
 
             <Link href="/authorization/sign-in" passHref>
               <AuthorizationLink>
-              Go to the next step
+                Go to the next step
               </AuthorizationLink>
             </Link>
           </HaveAnAccountContainer>

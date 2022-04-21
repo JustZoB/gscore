@@ -58,15 +58,32 @@ export default function Home({ products }) {
 export const Cards = styled.div`
   display: flex;
   width: 100%;
+  justify-content: center;
+
+  @media screen and (max-width: 991.92px) {
+    flex-direction: column;
+    align-items: center;
+  }
 
   & > * {
     width: calc(33% - 20px);
     max-width: 404px;
 
+    @media screen and (max-width: 991.92px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 767.92px) {
+      max-width: fit-content;
+    }
+
     &:nth-child(2n - 1) {
       margin-top: 50px;
       color: ${colors.lightGray};
       background-color: ${colors.darkerGray};
+
+      @media screen and (max-width: 991.92px) {
+        margin-top: 0;
+      }
     }
 
     &:nth-child(2n) {
@@ -76,6 +93,14 @@ export const Cards = styled.div`
 
     &:not(:last-child) {
       margin-right: 30px;
+
+      @media screen and (max-width: 1199.92px) {
+        margin-right: 25px;
+      }
+      @media screen and (max-width: 991.92px) {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
     }
   }
 `

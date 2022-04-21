@@ -25,7 +25,7 @@ export const Subscribes: React.FC<SubscribesProps> = ({ subscribes }) => {
             currentPeriodEnd,
             status,
             product,
-          }, index ) => (
+          }, index) => (
             <CardSubscribe
               key={id}
               id={id}
@@ -57,6 +57,10 @@ const SubscribesItems = styled.div<SubscribesItemsProps>`
   width: ${(props) => (`${props.length * 50}%`)};
   transform: ${(props) => (`translateX(-${100 / props.length * (props.activeElement - 1)}%)`)};
   transition: 0.5s;
+
+  @media screen and (max-width: 767.92px) {
+    width: ${(props) => (`${props.length * 100}%`)};
+  }
 
   & > * {
     width: ${(props) => (`calc(${100 / props.length}% - ${(props.length - 1) * 28 / props.length}px)`)};

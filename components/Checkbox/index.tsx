@@ -15,8 +15,8 @@ export const Checkbox: React.FC<CheckboxProps> = (props) => {
     <CheckboxContainer>
       <CheckboxInput type='checkbox' {...props} />
       {props.disabled
-      ? <DisabledCustomCheckbox />
-      : <>
+        ? <DisabledCustomCheckbox />
+        : <>
           <CustomCheckbox checked={props.checked} />
           {props.checked &&
             <Image
@@ -25,18 +25,19 @@ export const Checkbox: React.FC<CheckboxProps> = (props) => {
               layout="fixed"
             />
           }
-      </>
+        </>
       }
     </CheckboxContainer>
   )
 }
 
-const CheckboxContainer  = styled.label`
+const CheckboxContainer = styled.label`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 30px;
+  height: 30px;
 `
 
 const CheckboxInput = styled.input`

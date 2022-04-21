@@ -25,3 +25,10 @@
   font-weight: 500;
   src: url('/fonts/Inter/Inter-Medium.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/Inter/Inter-Bold.ttf') format('truetype');
+}

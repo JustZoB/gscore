@@ -28,4 +28,9 @@ const StyledStatus = styled.span<StatusProps>`
   font-size: 22px;
   line-height: 28px;
   font-weight: 700;
+
+  @media screen and (max-width: 767.92px) {
+    font-size: 20px;
+    line-height: 22px;
+  }
 `
