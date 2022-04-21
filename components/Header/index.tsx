@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import logo from '../../public/logo.png';
 import arrow from '../../public/arrow.svg';
 import { DropDownButton, DropDownMenu, HeaderContainer, LinkContainer, LinksContainer, LinkText, LogoWrapper } from "./styles";
@@ -13,16 +13,23 @@ import { openBurgerMenu } from "../../store/burgerMenu/reducers";
 import SettingsSVG from "../../public/svg/SettingsSVG";
 import colors from "../../utils/colors";
 import LogOutSCG from "../../public/svg/LogOutSCG";
+import { useOutsideClick } from "../../utils/outsideClick";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const authorization = useSelector((state: RootState) => state.authorizationSlice);
   const [dropDownActive, setDropDownActive] = useState<boolean>(false);
-
+  const dropdownref = useRef()
   const handleLogOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
     dispatch(logOut())
     dispatch(clearAfterLogOut())
   }
+
+  const onToggleDropDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    setDropDownActive(!dropDownActive)
+  }
+
+  useOutsideClick({ ref:dropdownref , onOutsideClick: onToggleDropDown }); 
 
   return (
     <HeaderContainer>
@@ -47,7 +54,7 @@ export const Header: React.FC = () => {
                   </Link>
                 </LinkContainer>
 
-                <DropDownButton onClick={() => setDropDownActive(!dropDownActive)}>
+                <DropDownButton onClick={onToggleDropDown}>
                   <LinkText>{authorization.user.user.username}</LinkText>
                   <Image
                     src={arrow}
@@ -55,7 +62,7 @@ export const Header: React.FC = () => {
                     layout="fixed"
                   />
                   {dropDownActive &&
-                    <DropDownMenu>
+                    <DropDownMenu ref={dropdownref}>
                       <Link href="/settings/update-data-form" passHref>
                         <a>
                           <LinkContainer>
