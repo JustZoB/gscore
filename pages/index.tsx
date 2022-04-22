@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { clearingAuthorization } from "../store/authorization/reducers";
 import Link from "next/link";
 import { clearingSubscribes } from "../store/subscribes/reducers";
+import { closeBurgerMenu } from "../store/burgerMenu/reducers";
 
 export async function getServerSideProps() {
   const response = await axios.get<Product[]>(`/products`)
@@ -22,6 +23,7 @@ export default function Home({ products }) {
 
   useEffect(() => {
     const handleStart = () => {
+      dispatch(closeBurgerMenu())
       dispatch(clearingAuthorization())
       dispatch(clearingSubscribes())
     }

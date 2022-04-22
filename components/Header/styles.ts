@@ -5,6 +5,7 @@ export const HeaderContainer = styled.header`
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 32px 86px;
 
   @media screen and (max-width: 1199.92px) {
@@ -18,6 +19,20 @@ export const HeaderContainer = styled.header`
   }
   @media screen and (max-width: 575.92px) {
     padding: 16px;
+  }
+`
+
+export const LogoWrapper = styled.div`
+  width: 171px;
+  height: 42px;
+
+  @media screen and (max-width: 991.92px) {
+    width: 150px;
+    height: 37px;
+  }
+  @media screen and (max-width: 767.92px) {
+    width: 130px;
+    height: 32px;
   }
 `
 

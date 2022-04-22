@@ -28,10 +28,12 @@ export const CardBuyList: React.FC<CardBuyListProps> = ({ isEven, sitesCount }) 
 export const CardBuyItem: React.FC<CardBuyItemProps> = ({ children, isEven }) => {
   return (
     <StyledCardBuyItem>
-      <Image
-        src={isEven ? checkBlack : checkRed}
-        alt='check'
-      />
+      <CheckWrapper>
+        <Image
+          src={isEven ? checkBlack : checkRed}
+          alt='check'
+        />
+      </CheckWrapper>
       <CardBuyText>
         {children}
       </CardBuyText>
@@ -56,6 +58,11 @@ export const StyledCardBuyItem = styled.li`
   &:not(:last-child) {
     margin-bottom: 22px;
   }
+`
+
+export const CheckWrapper = styled.div`
+  min-width: 27px;
+  min-height: 27px;
 `
 
 export const CardBuyText = styled.p`
